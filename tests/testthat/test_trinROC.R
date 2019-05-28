@@ -3,15 +3,15 @@
 ## Author          : Samuel Noll
 ## Document created: 21/12/2017
 ## Last modified   : ././2018 Descripiton
-##                 : ..
+##                 : RF: 26/05/2019 adapt seed change
 ###############################################################################
 ##Purpose: Test the trinROC package.
 
+seedvalues <- if (R.version$minor<6) c(.24,.537,1.163) else c(.25,.534,1.144)
 
 # In this file we test all functions of trinROC.
 # Each function is embedded in one context().
 # Order is alphabetically
-
 
 context("Test boot.test, trinVUS.test and trinROC.test:")
 
@@ -47,13 +47,13 @@ test_that("boot.test() function", {
 
   # test sampled data, single assessment:
   temp <- boot.test(dat = dat[,1:2])
-  expect_equal(round(temp$p.value,2), 0.24)
+  expect_equal(round(temp$p.value,2), seedvalues[1])
   expect_equal(unname(round(temp$estimate[1],3)), 0.368)
 
   # test sampled data, comparison of markers:
   temp <- boot.test(dat = dat[,1:3])
   expect_equal(round(temp$p.value,2), 0.59)
-  expect_equal(unname(round(temp$statistic,3)), 0.537)
+  expect_equal(unname(round(temp$statistic,3)),  seedvalues[2])
   })
 
 
@@ -113,7 +113,7 @@ context("Test EDA functions: roc.eda(), rocsurf.emp(), rocsurf.trin():")
 test_that("roc.eda(), whole functionality", {
 
   temp <- roc.eda(dat = dat[,1:2], plotVUS = FALSE)
-  expect_equal(unname(round(temp$statistic,3)), 1.163)
+  expect_equal(unname(round(temp$statistic,3)), seedvalues[3])
   expect_equal(unname(temp$VUS), 0.368)
   expect_equal(unname(round(temp$dat.summary[1,3],3)), 1.201)
 

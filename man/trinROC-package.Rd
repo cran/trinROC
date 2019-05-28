@@ -26,11 +26,15 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Samuel Noll \email{uncle.sam@gmx.net}
+\strong{Maintainer}: Reinhard Furrer \email{reinhard.furrer@math.uzh.ch} [contributor]
+
+Authors:
+\itemize{
+  \item Samuel Noll \email{uncle.sam@gmx.net}
+}
 
 Other contributors:
 \itemize{
-  \item Reinhard Furrer \email{reinhard.furrer@math.uzh.ch} [contributor]
   \item Benjamin Reiser [contributor]
   \item Christos T. Nakas \email{cnakas@uth.gr} [contributor]
 }

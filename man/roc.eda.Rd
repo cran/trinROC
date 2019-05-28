@@ -5,9 +5,9 @@
 \title{Exploratory data analysis for a three-class ROC marker}
 \usage{
 roc.eda(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
-  plotVUS = FALSE, saveVUS = FALSE, sep.dens = FALSE, scatter = FALSE,
-  conf.level = 0.95, n.boot = 1000, verbose = TRUE,
-  alternative = c("two.sided", "less", "greater"))
+  plotVUS = FALSE, saveVUS = FALSE, sep.dens = FALSE,
+  scatter = FALSE, conf.level = 0.95, n.boot = 1000,
+  verbose = TRUE, alternative = c("two.sided", "less", "greater"))
 }
 \arguments{
 \item{x, y, z}{numeric vectors contaning the measurements from the healthy,

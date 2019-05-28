@@ -4,7 +4,8 @@
 \alias{findmu}
 \title{Determine equidistant means of trinormal ROC data simulation}
 \usage{
-findmu(mux = 0, sdx = 1, sdy = 1, sdz = 1, VUS = 1/6, step = 0.001)
+findmu(mux = 0, sdx = 1, sdy = 1, sdz = 1, VUS = 1/6,
+  step = 0.001)
 }
 \arguments{
 \item{mux}{The numeric mean of the healthy class. Default is zero.}

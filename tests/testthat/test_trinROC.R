@@ -7,7 +7,7 @@
 ###############################################################################
 ##Purpose: Test the trinROC package.
 
-seedvalues <- if (R.version$minor<6) c(.24,.537,1.163) else c(.25,.534,1.144)
+seedvalues <- if (R.version$minor<6 & R.version$major<4) c(.24,.537,1.163) else c(.25,.534,1.144)
 
 # In this file we test all functions of trinROC.
 # Each function is embedded in one context().

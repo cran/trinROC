@@ -1,4 +1,4 @@
-8398be8191b798ed9b15c0f5ab9382cf *DESCRIPTION
+51f97f561f7fd8d618a0ec0682588c98 *DESCRIPTION
 c2045504d0aa0f33e4ec0216cae7c575 *NAMESPACE
 2c58075bfeff1f6014a32d7b583016d9 *R/SD_VAR.R
 2c8abb9fa21921baf4b813d075b114bf *R/boot.test.R
@@ -15,7 +15,7 @@ d5201cce36c547c07ecc7a454a5fe725 *R/roc3.test.R
 62b1885c1c1264d33daeed7b3228f99e *R/trinROC.test.R
 d3e02e1060b81a21f85097b773cb9f8c *R/trinVUS.test.R
 d786612f5689df90c0af951eb93a86c3 *R/zzz.R
-98d6121cca745ba6abc3e8640343245b *build/vignette.rds
+ee7396b8e8615243bc9592fdd782eadf *build/vignette.rds
 cd56cdd62d6cec400c18b2021b1bd8b8 *data/cancer.RData
 069d450aa4f4e35e37f3538337991e80 *data/krebs.RData
 6ebd836caa2dfa1f6fa7fb874e7f9df3 *inst/doc/trinROC_vignette.R
@@ -35,9 +35,9 @@ f02bbf919f9c67c142646d2ab49466de *man/roc3.test.Rd
 981a426c2291dc803f1200866890a1b8 *man/trinROC.test.Rd
 d6d5fd5f8733ef07fa39f6c02f4297e4 *man/trinVUS.test.Rd
 ffe5b9f34b215b35ddbece72a23da16a *tests/testthat.R
-8b1206a4c0a36fa76f7462534c384b87 *tests/testthat/test_trinROC.R
+276ecaeba6fc8950048dafbea783c246 *tests/testthat/test_trinROC.R
 f26293da0ae1892706eaf319115f111d *vignettes/Figures/empVUS.png
 2678907e906a234125124d0a1dc72298 *vignettes/Figures/trinVUS.png
 548e9f58adb99d4282ff21f00244b7b2 *vignettes/Overview.bib
 eecdc0d6b1969dca222151a9a6c5e8a8 *vignettes/trinROC_vignette.Rmd
-d418db88e7e8cf6ab26ad5cb4833851f *vignettes/trinROC_vignette.html
+a4991d4cd41434f5ffc4944c6eda7e88 *vignettes/trinROC_vignette.html

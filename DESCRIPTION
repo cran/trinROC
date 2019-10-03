@@ -1,6 +1,6 @@
 Package: trinROC
 Title: Statistical Tests for Assessing Trinormal ROC Data
-Version: 0.3
+Version: 0.3.1
 Authors@R: c(person("Samuel", "Noll", email = "uncle.sam@gmx.net", role = c("aut")), person("Reinhard", "Furrer", role = c("ctb", "cre"), email = "reinhard.furrer@math.uzh.ch"), person("Benjamin", "Reiser", role = c("ctb")), person("Christos T.", "Nakas", role = c("ctb"), email = "cnakas@uth.gr"))
 Description: Several statistical test functions as well as a function for exploratory data analysis to investigate classifiers allocating individuals to one of three disjoint and ordered classes. In a single classifier assessment the discriminatory power is compared to classification by chance. In a comparison of two classifiers the null hypothesis corresponds to equal discriminatory power of the two classifiers.
 Depends: R (>= 3.3.0)
@@ -13,11 +13,11 @@ Suggests: testthat, knitr, rmarkdown, MASS, reshape
 VignetteBuilder: knitr
 URL: https://git.math.uzh.ch/reinhard.furrer/trinROC
 NeedsCompilation: no
-Packaged: 2019-05-27 17:57:10 UTC; furrer
+Packaged: 2019-10-02 19:34:51 UTC; furrer
 Author: Samuel Noll [aut],
   Reinhard Furrer [ctb, cre],
   Benjamin Reiser [ctb],
   Christos T. Nakas [ctb]
 Maintainer: Reinhard Furrer <reinhard.furrer@math.uzh.ch>
 Repository: CRAN
-Date/Publication: 2019-05-28 16:20:04 UTC
+Date/Publication: 2019-10-03 05:40:02 UTC

@@ -187,8 +187,8 @@ Beside the argument `paired` it is also possible to adjust the confidence level 
 In this section, we outline the code used to construct the empirical power curves of Figures 2, 3 etc. For simplicity, here and in the paper, we set the mean and variances if the healthy group to zero and one, respectively. The variances of the intermediate and diseased groups are pre-specified ("slight crossing"). Finally the remaining means are found based on a desired VUS.
 
 ```{r emppow, fig.width = 6.5, fig.asp = .4}
-require( ggplot2)
-require( MASS)
+require( ggplot2, quietly = TRUE)
+require( MASS, quietly = TRUE)
 N <- 25
 reps <- 99                    # Is set to 1000 in the paper
 rho <- 0.5                    # paired setting if rho!=0

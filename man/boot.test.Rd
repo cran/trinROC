@@ -4,9 +4,19 @@
 \alias{boot.test}
 \title{Bootstrap test for three-class ROC data}
 \usage{
-boot.test(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
-  paired = FALSE, n.boot = 1000, conf.level = 0.95,
-  alternative = c("two.sided", "less", "greater"))
+boot.test(
+  x1,
+  y1,
+  z1,
+  x2 = 0,
+  y2 = 0,
+  z2 = 0,
+  dat = NULL,
+  paired = FALSE,
+  n.boot = 1000,
+  conf.level = 0.95,
+  alternative = c("two.sided", "less", "greater")
+)
 }
 \arguments{
 \item{x1, y1, z1}{Non-empty numeric vectors of data from the healthy,
@@ -31,16 +41,16 @@ classifiers.}
 \item{n.boot}{An integer incicating the number of bootstrap replicates
 sampled to obtain the variance of the VUS. Default is 1000.}
 
-\item{conf.level}{A numeric value between 0 and 1 yielding the significance
-level \eqn{alpha=1-\code{conf.level}}.}
+\item{conf.level}{confidence level of the interval. A numeric value between (0,1)
+yielding the significance level \eqn{\alpha=1-\code{conf.level}}.}
 
 \item{alternative}{character string specifying the alternative hypothesis,
 must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}. You can specify
 just the initial letter. For two sided test, notice \eqn{H0: Z = (VUS_1-VUS_2) /
-(Var(VUS_1)+Var(VUS_2)-2*Cov(VUS_1,VUS_2))^{0.5}}.}
+(Var(VUS_1)+Var(VUS_2)-2Cov(VUS_1,VUS_2))^{0.5}}.}
 }
 \value{
-A list of class "htest" containing the following components:
+A list of class \code{"htest"} containing the following components:
   \item{statistic}{the value of the Z-statistic.}
   \item{p.value}{the p-value for the test.}
   \item{estimate}{a data frame containing the
@@ -87,16 +97,16 @@ boot.test(dat = krebs[,c(1,2)], n.boot=500)
 x1 <- with(krebs, krebs[trueClass=="healthy", 2])
 y1 <- with(krebs, krebs[trueClass=="intermediate", 2])
 z1 <- with(krebs, krebs[trueClass=="diseased", 2])
-\donttest{ boot.test(x1, y1, z1, n.boot=500) }
+\donttest{boot.test(x1, y1, z1, n.boot=500) }
 
 # comparison of marker 2 and 6:
-\donttest{ boot.test(dat = krebs[,c(1,2,5)], paired = TRUE) }
+\donttest{boot.test(dat = krebs[,c(1,2,5)], paired = TRUE) }
 
 # result is equal to:
 x2 <- with(krebs, krebs[trueClass=="healthy", 5])
 y2 <- with(krebs, krebs[trueClass=="intermediate", 5])
 z2 <- with(krebs, krebs[trueClass=="diseased", 5])
-\donttest{ boot.test(x1, y1, z1, x2, y2, z2, paired = TRUE) }
+\donttest{boot.test(x1, y1, z1, x2, y2, z2, paired = TRUE) }
 }
 \references{
 Nakas, C. T. and C. T. Yiannoutsos (2004). Ordered multiple-class

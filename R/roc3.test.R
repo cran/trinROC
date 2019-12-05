@@ -23,15 +23,14 @@
 #'   VUS test and \code{"Bootstrap"} the Bootstrap test.
 #' @param paired A logical indicating whether data arose from a paired setting.
 #' If data is paired, each class must have equal sample size for both classifiers.
-#' @param conf.level A numeric value between 0 and 1 yielding the significance
-#'   level \eqn{alpha=1-\code{conf.level}}.
+#' @param conf.level confidence level of the interval. A numeric value between (0,1)
+#'   yielding the significance level \eqn{\alpha=1-\code{conf.level}}.
 #' @param n.boot An integer incicating the number of Bootstrap replicates sampled
 #'  to obtain the variance of the VUS. Default is 1000.
 #' @param p.adjust A logical, indicating whether a FDR adjustment
 #'    should be applied to the p-values. Default is \code{FALSE}.
-# #'@param alternative A character string specifying the alternative hypothesis,  must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}.
-#'@section Note: If \code{type = "Bootstrap"}, the Bootstrap test is evaluated. This
-#'may take some time, especially with sample sizes >= 100.
+#' @section Note: If \code{type = "Bootstrap"}, the Bootstrap test is evaluated. This
+#'  may take some time, especially with sample sizes > 100.
 #' @return A list with components:
 #'   \item{Overview}{a data frame with number of columns according to number of
 #'   markers. Rows contain the following information about the makers:
@@ -47,10 +46,8 @@
 #'   \item{Test.Values}{a list, containing the upper triangular matrices of the
 #'   test values of the statistical tests chosen by \code{type}.}
 #' @examples
-#' \donttest{
 #' data(krebs)
-#' roc3.test(krebs, type = c("ROC", "VUS"), paired = TRUE)
-#' }
+#' roc3.test(krebs, type = c("ROC", "VUS"), paired = TRUE)[c("Overview","P.values")]
 #' @export
 
 roc3.test <- function(dat, type = c("ROC","VUS","Bootstrap"),
@@ -65,11 +62,11 @@ roc3.test <- function(dat, type = c("ROC","VUS","Bootstrap"),
     stop("There exists no paired method for single classifier assessment")
 
   if (!missing(conf.level) && (length(conf.level) != 1 || !is.finite(conf.level) ||
-                               conf.level < 0 || conf.level > 1))
+                               conf.level <= 0 || conf.level >= 1))
     stop("'conf.level' must be a single number between 0 and 1")
 
-  if (class(dat) != "data.frame" || class(dat[,1]) != "factor" || ncol(dat) <= 1)
-    stop("Data should be organized as a data frame with the group index factor at
+  if ( !inherits(dat,"data.frame") | !inherits(dat[,1],"factor") | ncol(dat) <= 1)
+      stop("Data should be organized as a data frame with the group index factor at
          the first column and marker measurements at the second and third column.")
   # check for classes of column vectors of dat, should all be numeric:
   if (any(sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")) ) {

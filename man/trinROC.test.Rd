@@ -4,8 +4,17 @@
 \alias{trinROC.test}
 \title{Trinormal based ROC test}
 \usage{
-trinROC.test(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
-  paired = FALSE, conf.level = 0.95)
+trinROC.test(
+  x1,
+  y1,
+  z1,
+  x2 = 0,
+  y2 = 0,
+  z2 = 0,
+  dat = NULL,
+  paired = FALSE,
+  conf.level = 0.95
+)
 }
 \arguments{
 \item{x1, y1, z1}{(non-empty) numeric vectors of data from the healthy,
@@ -26,8 +35,8 @@ contains the measurementss from the Classifier.}
 If \code{TRUE}, each class must have equal sample size for both
 classifiers.}
 
-\item{conf.level}{A numeric value between 0 and 1 yielding the significance
-level \eqn{alpha=1-\code{conf.level}}.}
+\item{conf.level}{confidence level of the interval. A numeric value between (0,1)
+yielding the significance level \eqn{\alpha=1-\code{conf.level}}.}
 }
 \value{
 A list of class \code{"htest"} containing the following components:

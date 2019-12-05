@@ -36,13 +36,13 @@
 #'   classifiers.
 #' @param n.boot An integer incicating the number of bootstrap replicates
 #'   sampled to obtain the variance of the VUS. Default is 1000.
-#' @param conf.level A numeric value between 0 and 1 yielding the significance
-#'   level \eqn{alpha=1-\code{conf.level}}.
+#' @param conf.level confidence level of the interval. A numeric value between (0,1)
+#'   yielding the significance level \eqn{\alpha=1-\code{conf.level}}.
 #' @param alternative character string specifying the alternative hypothesis,
 #'   must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}. You can specify
 #'   just the initial letter. For two sided test, notice \eqn{H0: Z = (VUS_1-VUS_2) /
-#'   (Var(VUS_1)+Var(VUS_2)-2*Cov(VUS_1,VUS_2))^{0.5}}.
-#' @return A list of class "htest" containing the following components:
+#'   (Var(VUS_1)+Var(VUS_2)-2Cov(VUS_1,VUS_2))^{0.5}}.
+#' @return A list of class \code{"htest"} containing the following components:
 #'   \item{statistic}{the value of the Z-statistic.}
 #'   \item{p.value}{the p-value for the test.}
 # #'   \item{conf.int}{a confidence interval for the test.}
@@ -74,16 +74,16 @@
 #' x1 <- with(krebs, krebs[trueClass=="healthy", 2])
 #' y1 <- with(krebs, krebs[trueClass=="intermediate", 2])
 #' z1 <- with(krebs, krebs[trueClass=="diseased", 2])
-#' \donttest{ boot.test(x1, y1, z1, n.boot=500) }
+#' \donttest{boot.test(x1, y1, z1, n.boot=500) }
 #'
 #' # comparison of marker 2 and 6:
-#' \donttest{ boot.test(dat = krebs[,c(1,2,5)], paired = TRUE) }
+#' \donttest{boot.test(dat = krebs[,c(1,2,5)], paired = TRUE) }
 #'
 #' # result is equal to:
 #' x2 <- with(krebs, krebs[trueClass=="healthy", 5])
 #' y2 <- with(krebs, krebs[trueClass=="intermediate", 5])
 #' z2 <- with(krebs, krebs[trueClass=="diseased", 5])
-#' \donttest{ boot.test(x1, y1, z1, x2, y2, z2, paired = TRUE) }
+#' \donttest{boot.test(x1, y1, z1, x2, y2, z2, paired = TRUE) }
 
 
 boot.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
@@ -93,13 +93,13 @@ boot.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   alternative <- match.arg(alternative)
   # check if confidence level is appropriatly set:
   if (!missing(conf.level) && (length(conf.level) != 1 || !is.finite(conf.level) ||
-                               conf.level < 0 || conf.level > 1))
+                               conf.level <= 0 || conf.level >= 1))
     stop("'conf.level' must be a single number between 0 and 1")
 
   # if data comes in a data.frame, unpack it:
   ## Important: levels symbolize the correctly ordered classes
   if (!is.null(dat)) {
-    if (class(dat) != "data.frame" || class(dat[,1]) != "factor" | ncol(dat) <= 1)
+    if ( !inherits(dat,"data.frame") | !inherits(dat[,1],"factor") | ncol(dat) <= 1)
       stop("Data should be organized as a data frame with the group index factor at
            the first column and marker measurements at the second and third column.")
     if (any(sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")) ) {

@@ -4,10 +4,21 @@
 \alias{roc.eda}
 \title{Exploratory data analysis for a three-class ROC marker}
 \usage{
-roc.eda(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
-  plotVUS = FALSE, saveVUS = FALSE, sep.dens = FALSE,
-  scatter = FALSE, conf.level = 0.95, n.boot = 1000,
-  verbose = TRUE, alternative = c("two.sided", "less", "greater"))
+roc.eda(
+  x,
+  y,
+  z,
+  dat = NULL,
+  type = c("empirical", "trinormal"),
+  plotVUS = FALSE,
+  saveVUS = FALSE,
+  sep.dens = FALSE,
+  scatter = FALSE,
+  conf.level = 0.95,
+  n.boot = 1000,
+  verbose = TRUE,
+  alternative = c("two.sided", "less", "greater")
+)
 }
 \arguments{
 \item{x, y, z}{numeric vectors contaning the measurements from the healthy,
@@ -36,7 +47,7 @@ be plotted as a boxplot (default) or as a scatterplot (\code{scatter =
 TRUE}).}
 
 \item{conf.level}{A numeric value between 0 and 1 yielding the significance
-level \eqn{alpha=1-\code{conf.level}}.}
+level \eqn{\alpha=1-\code{conf.level}}.}
 
 \item{n.boot}{an integer incicating the number of bootstrap replicates sampled
 to obtain the variance of the VUS. Default is 1000.}
@@ -95,17 +106,13 @@ roc.eda(dat = krebs[,c(1,5)], type = "e", plotVUS = FALSE)
 x <- with(krebs, krebs[trueClass=="healthy", 5])
 y <- with(krebs, krebs[trueClass=="intermediate", 5])
 z <- with(krebs, krebs[trueClass=="diseased", 5])
-\dontrun{
-   roc.eda(x, y, z, type = "e", sep.dens = TRUE)
-}
+roc.eda(x, y, z, type = "e", sep.dens = TRUE)
 
 data(cancer)
 # trinormal EDA:
 roc.eda(dat = cancer[,c(1,10)], type = "trin", plotVUS = FALSE)
 # trinormal EDA with different plots:
-\dontrun{
-   roc.eda(dat = cancer[,c(1,5)], type = "t", sep.dens = TRUE, scatter = TRUE)
-}
+roc.eda(dat = cancer[,c(1,5)], type = "t", sep.dens = TRUE, scatter = TRUE)
 }
 \seealso{
 \code{\link{trinROC.test}}, \code{\link{trinVUS.test}} for trinormal

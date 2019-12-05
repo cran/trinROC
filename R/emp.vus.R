@@ -41,7 +41,7 @@ emp.vus <- function(x, y, z, dat = NULL, old.version = TRUE) {
   # if data comes in a data.frame, unpack it:
   ## Important: levels symbolize the correctly ordered classes
   if (!is.null(dat)) {
-    if (class(dat) != "data.frame" || class(dat[,1]) != "factor" | ncol(dat) <= 1)
+    if ( !inherits(dat,"data.frame") | !inherits(dat[,1],"factor") | ncol(dat) <= 1)
       stop("Data should be organized as a data frame with the group index factor at
            the first column and marker measurements at the second column.")
 

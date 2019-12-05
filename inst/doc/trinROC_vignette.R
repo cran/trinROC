@@ -48,8 +48,8 @@ ROCcomp2 <- trinROC.test(x1, y1, z1, x2, y2, z2, paired = TRUE)
 
 
 ## ----emppow, fig.width = 6.5, fig.asp = .4-------------------------------
-require( ggplot2)
-require( MASS)
+require( ggplot2, quietly = TRUE)
+require( MASS, quietly = TRUE)
 N <- 25
 reps <- 99                    # Is set to 1000 in the paper
 rho <- 0.5                    # paired setting if rho!=0

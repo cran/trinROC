@@ -4,9 +4,18 @@
 \alias{trinVUS.test}
 \title{Trinormal VUS test}
 \usage{
-trinVUS.test(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
-  paired = FALSE, conf.level = 0.95, alternative = c("two.sided",
-  "less", "greater"))
+trinVUS.test(
+  x1,
+  y1,
+  z1,
+  x2 = 0,
+  y2 = 0,
+  z2 = 0,
+  dat = NULL,
+  paired = FALSE,
+  conf.level = 0.95,
+  alternative = c("two.sided", "less", "greater")
+)
 }
 \arguments{
 \item{x1, y1, z1}{non-empty numeric vectors of data from the healthy,
@@ -28,13 +37,13 @@ contains the measurementss from the Classifier.}
 If \code{TRUE}, each class must have equal sample size for both
 classifiers.}
 
-\item{conf.level}{A numeric value between 0 and 1 yielding the significance
-level \eqn{alpha=1-\code{conf.level}}.}
+\item{conf.level}{confidence level of the interval. A numeric value between (0,1)
+yielding the significance level \eqn{\alpha=1-\code{conf.level}}.}
 
 \item{alternative}{character string specifying the alternative hypothesis,
 must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}. You can specify
 just the initial letter. For two sided test, notice \eqn{H0: Z = (VUS_1-VUS_2) /
-(Var(VUS_1)+Var(VUS_2)-2*Cov(VUS_1,VUS_2))^{0.5}}.}
+(Var(VUS_1)+Var(VUS_2)-2Cov(VUS_1,VUS_2))^{0.5}}.}
 }
 \value{
 A list of class \code{"htest"} containing the following components:

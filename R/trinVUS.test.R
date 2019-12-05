@@ -54,12 +54,12 @@
 #' @param paired logical; indicating whether data arose from a paired setting.
 #'   If \code{TRUE}, each class must have equal sample size for both
 #'   classifiers.
-#' @param conf.level A numeric value between 0 and 1 yielding the significance
-#'   level \eqn{alpha=1-\code{conf.level}}.
+#' @param conf.level confidence level of the interval. A numeric value between (0,1)
+#'   yielding the significance level \eqn{\alpha=1-\code{conf.level}}.
 #' @param alternative character string specifying the alternative hypothesis,
 #'   must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}. You can specify
 #'   just the initial letter. For two sided test, notice \eqn{H0: Z = (VUS_1-VUS_2) /
-#'   (Var(VUS_1)+Var(VUS_2)-2*Cov(VUS_1,VUS_2))^{0.5}}.
+#'   (Var(VUS_1)+Var(VUS_2)-2Cov(VUS_1,VUS_2))^{0.5}}.
 #' @return A list of class \code{"htest"} containing the following components:
 #'   \item{statistic}{the value of the Z-statistic.}
 #'   \item{p.value}{the p-value for the test.}
@@ -115,13 +115,13 @@ trinVUS.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   alternative <- match.arg(alternative)
   # check if confidence level is appropriatly set:
   if (!missing(conf.level) & (length(conf.level) != 1 | !is.finite(conf.level) |
-                               conf.level < 0 | conf.level > 1))
+                               conf.level <= 0 | conf.level >= 1))
     stop("'conf.level' must be a single number between 0 and 1")
 
   # if data comes in a data.frame, unpack it:
   ## Important: levels symbolize the correctly ordered classes
   if (!is.null(dat)) {
-    if (class(dat) != "data.frame" | class(dat[,1]) != "factor" | ncol(dat) <= 1)
+    if ( !inherits(dat,"data.frame") | !inherits(dat[,1],"factor") | ncol(dat) <= 1)
       stop("Data should be organized as a data frame with the group index factor at
            the first column and marker measurements at the second and third column.")
     if (any(sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")) ) {

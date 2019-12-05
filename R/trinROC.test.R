@@ -70,8 +70,8 @@
 #' @importFrom ggplot2 ggplot  aes coord_flip facet_grid geom_boxplot
 #'   geom_density geom_histogram geom_jitter labs scale_colour_manual
 #'   scale_fill_manual stat_boxplot aes_string
-#' @param conf.level A numeric value between 0 and 1 yielding the significance
-#'   level \eqn{alpha=1-\code{conf.level}}.
+#' @param conf.level confidence level of the interval. A numeric value between (0,1)
+#'   yielding the significance level \eqn{\alpha=1-\code{conf.level}}.
 #'
 #' @return A list of class \code{"htest"} containing the following components:
 #'   \item{statistic}{the value of the chi-squared statistic.}
@@ -130,14 +130,14 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
 
   # check if confidence level is appropriatly set:
   if (!missing(conf.level) & (length(conf.level) != 1 | !is.finite(conf.level) |
-                               conf.level < 0 | conf.level > 1))
+                               conf.level <= 0 | conf.level >= 1))
     stop("'conf.level' must be a single number between 0 and 1")
 
 
   # if data comes in a data.frame, unpack it:
   ## Important: levels symbolize the correctly ordered classes
   if (!is.null(dat)) {
-    if (class(dat) != "data.frame" || class(dat[,1]) != "factor" | ncol(dat) <= 1)
+    if ( !inherits(dat,"data.frame") | !inherits(dat[,1],"factor") | ncol(dat) <= 1)
       stop("Data should be organized as a data frame with the group index factor at
            the first column and marker measurements at the second and third column.")
     if (any(sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")) ) {
@@ -315,7 +315,7 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
                          covAD,covBD,covCD,varD),4,4)
 
   # compute Chi-squared test statistic:
-  if (class(try(solve(covariance),silent=T))!="matrix") {
+  if (!inherits(try(solve(covariance),silent=T),"matrix")) {
     chi2 <- 0
     print("matrix is not invertible. Conclude complete alikeness.")
   } else {

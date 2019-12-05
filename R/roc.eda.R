@@ -27,7 +27,7 @@
 #'  be plotted as a boxplot (default) or as a scatterplot (\code{scatter =
 #'  TRUE}).
 #' @param conf.level A numeric value between 0 and 1 yielding the significance
-#'   level \eqn{alpha=1-\code{conf.level}}.
+#'   level \eqn{\alpha=1-\code{conf.level}}.
 #'@param n.boot an integer incicating the number of bootstrap replicates sampled
 #'  to obtain the variance of the VUS. Default is 1000.
 #'@param verbose a logical, indicating whether output should be displayed or
@@ -71,21 +71,22 @@
 #' x <- with(krebs, krebs[trueClass=="healthy", 5])
 #' y <- with(krebs, krebs[trueClass=="intermediate", 5])
 #' z <- with(krebs, krebs[trueClass=="diseased", 5])
-#' \dontrun{
-#'    roc.eda(x, y, z, type = "e", sep.dens = TRUE)
-#' }
+#' roc.eda(x, y, z, type = "e", sep.dens = TRUE)
 #'
 #' data(cancer)
 #' # trinormal EDA:
 #' roc.eda(dat = cancer[,c(1,10)], type = "trin", plotVUS = FALSE)
 #' # trinormal EDA with different plots:
-#' \dontrun{
-#'    roc.eda(dat = cancer[,c(1,5)], type = "t", sep.dens = TRUE, scatter = TRUE)
-#' }
+#' roc.eda(dat = cancer[,c(1,5)], type = "t", sep.dens = TRUE, scatter = TRUE)
 
 #@param transform.data A logical, if TRUE a box-cox transformation is performed
 #  on the measurements. This option only affects the results if \code{type =
 #  "trinormal"}.
+
+
+# RF:
+# - changes from [0,1] -> (0,1)
+# - class to inherits
 
 roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
                       plotVUS = FALSE, saveVUS = FALSE, sep.dens = FALSE,
@@ -97,18 +98,18 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
   Marker <- "Classifier"
 
   if (!missing(conf.level) & (length(conf.level) != 1 | !is.finite(conf.level) |
-                               conf.level < 0 | conf.level > 1))
+                               conf.level <= 0 | conf.level >= 1))
     stop("'conf.level' must be a single number between 0 and 1")
 
   alternative <- match.arg(alternative)
 
   if (!is.null(dat)) {
-    if (class(dat) != "data.frame" | class(dat[,1]) != "factor" | ncol(dat) <= 1)
+    if ( !inherits(dat,"data.frame") | !inherits(dat[,1],"factor") | ncol(dat) <= 1)
       stop("Data should be organized as a data frame with the group index factor at
            the first column and marker measurements at the second and third column.")
     # check for classes of column vectors of dat, should all be numeric:
-    if (any(sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")) ) {
-      not.num <- sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")
+    if (any(sapply(1 : (ncol(dat)-1), function(i) !inherits(dat[, i+1],"numeric"))) ) {
+      not.num <- sapply(1 : (ncol(dat)-1), function(i) inherits(dat[, i+1],"numeric"))
       dat[, not.num==FALSE] <- as.numeric(dat[, not.num==FALSE])
       warning("Some measurements were not numeric. Forced to numeric.")
     }
@@ -157,9 +158,9 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
       statistic <- c(temptrinROC$statistic, temptrinVUS$statistic)
       p.value   <- c(temptrinROC$p.value, temptrinVUS$p.value)
       conf.int  <- c(temptrinROC$conf.int, temptrinVUS$conf.int)
-      names(VUS)      <- "trinormal VUS:"
-      names(statistic)<- c("ROC test statistic:", "VUS test statistic:")
-      names(p.value)  <- c("ROC p.value:", "VUS p.value:")
+      names(VUS)      <- "trinormal VUS: "
+      names(statistic)<- c("ROC test statistic: ", "VUS test statistic: ")
+      names(p.value)  <- c("ROC p.value: ", "VUS p.value: ")
       summary   <- temptrinROC$Summary
 
       # compute 3dim surface:
@@ -184,9 +185,9 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
     statistic<- tempBoot$statistic
     p.value  <- tempBoot$p.value
     conf.int <- tempBoot$conf.int
-    names(VUS)      <- "empirical VUS:"
-    names(statistic)<- "Boot statistic:"
-    names(p.value)  <- "Boot p.value:"
+    names(VUS)      <- "empirical VUS: "
+    names(statistic)<- "Boot statistic: "
+    names(p.value)  <- "Boot p.value: "
     summary  <- tempBoot$Summary
 
     # compute 3dim surface:
@@ -265,14 +266,14 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
         "\n", sep = " ")
     cat(" data: ", dname[1], ", ", dname[2], " and ", dname[3], "\n\n", sep = "")
     cat("", rbind(names(statistic), round(statistic,3), c(", ",", ") ,
-                   names(p.value), round(p.value,5))[,1], "\n", sep = " ")
+                   names(p.value), round(p.value,5))[,1], "\n", sep = "")
     if (type == "trinormal") {
       cat("", rbind(names(statistic), round(statistic,3), c(", ",", ") ,
                    names(p.value), round(p.value,5))[,2], "\n", sep = " ") }
 
     cat("\n", names(VUS), round(VUS,3), "\n", sep = " ")
     if (type == "trinormal") {
-      cat("\n", "Parameters:", "\n", sep = " ")
+      cat("\n", "Parameters: ", "\n", sep = "")
       cat(" ", names(temptrinROC$estimate[-1]),"\n",sep="\t")
       cat(" ", as.numeric(round(temptrinROC$estimate[-1],4)),"\n",sep="\t") }
     cat("---------------------------------------------------------------------",

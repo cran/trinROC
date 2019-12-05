@@ -4,8 +4,14 @@
 \alias{roc3.test}
 \title{Statistical test function for computing multiple tests on three-class ROC data}
 \usage{
-roc3.test(dat, type = c("ROC", "VUS", "Bootstrap"), paired = FALSE,
-  conf.level = 0.95, n.boot = 1000, p.adjust = FALSE)
+roc3.test(
+  dat,
+  type = c("ROC", "VUS", "Bootstrap"),
+  paired = FALSE,
+  conf.level = 0.95,
+  n.boot = 1000,
+  p.adjust = FALSE
+)
 }
 \arguments{
 \item{dat}{A data frame of the following structure: The first column
@@ -20,8 +26,8 @@ VUS test and \code{"Bootstrap"} the Bootstrap test.}
 \item{paired}{A logical indicating whether data arose from a paired setting.
 If data is paired, each class must have equal sample size for both classifiers.}
 
-\item{conf.level}{A numeric value between 0 and 1 yielding the significance
-level \eqn{alpha=1-\code{conf.level}}.}
+\item{conf.level}{confidence level of the interval. A numeric value between (0,1)
+yielding the significance level \eqn{\alpha=1-\code{conf.level}}.}
 
 \item{n.boot}{An integer incicating the number of Bootstrap replicates sampled
 to obtain the variance of the VUS. Default is 1000.}
@@ -63,12 +69,10 @@ For the preliminary assessment of a classifier, different
 }
 \section{Note}{
  If \code{type = "Bootstrap"}, the Bootstrap test is evaluated. This
-may take some time, especially with sample sizes >= 100.
+ may take some time, especially with sample sizes > 100.
 }
 
 \examples{
-\donttest{
 data(krebs)
-roc3.test(krebs, type = c("ROC", "VUS"), paired = TRUE)
-}
+roc3.test(krebs, type = c("ROC", "VUS"), paired = TRUE)[c("Overview","P.values")]
 }

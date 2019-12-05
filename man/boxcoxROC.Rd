@@ -4,8 +4,15 @@
 \alias{boxcoxROC}
 \title{Box-Cox transformation on three-class ROC data}
 \usage{
-boxcoxROC(x, y, z, lambda = seq(-2, 2, 0.05), lambda2 = NULL,
-  eps = 0.02, verbose = TRUE)
+boxcoxROC(
+  x,
+  y,
+  z,
+  lambda = seq(-2, 2, 0.05),
+  lambda2 = NULL,
+  eps = 0.02,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{x, y, z}{vectors containing the data of the three classes "healthy",

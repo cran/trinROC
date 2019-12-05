@@ -19,14 +19,14 @@
 #'@param saveVUS A logical whether to save a PNG of the VUS in your current
 #'  working directory (default is \code{FALSE}).
 #'@return A list with the following components:
-#'\item{t1, t2}{Te vectors \eqn{t_-=F_-^(c_-)} and \eqn{t_+=F_+^(c_+)}}
+#'\item{t1, t2}{The vectors \eqn{t_-=F_-^{(c_-)}} and \eqn{t_+=F_+^{(c_+)}}}
 #'   \item{zVUS}{The matix containing the surface values.}
 #'   \item{x, y, z}{The original data.}
 #'
 #' @export
-#' @references Xiong, C., G. Van Belle, et al. (2006). “Measuring and estimating
-#'   diagnostic accuracy when there are three ordinal diagnostic groups”. In:
-#'   \emph{Statistics in Medicine} 25.7, pp. 1251–1273.
+#' @references Xiong, C., G. Van Belle, et al. (2006). Measuring and estimating
+#'   diagnostic accuracy when there are three ordinal diagnostic groups.
+#'   \emph{Statistics in Medicine} 25(7), 1251–1273.
 #' @examples
 #' data(cancer)
 #' x1 <- with(cancer, cancer[trueClass=="healthy", 8])

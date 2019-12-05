@@ -20,7 +20,7 @@ working directory (default is \code{FALSE}).}
 }
 \value{
 A list with the following components:
-\item{t1, t2}{Te vectors \eqn{t_-=F_-^(c_-)} and \eqn{t_+=F_+^(c_+)}}
+\item{t1, t2}{The vectors \eqn{t_-=F_-^{(c_-)}} and \eqn{t_+=F_+^{(c_+)}}}
   \item{zVUS}{The matix containing the surface values.}
   \item{x, y, z}{The original data.}
 }
@@ -47,7 +47,7 @@ z1 <- with(cancer, cancer[trueClass=="diseased", 8])
 rocsurf.trin(x1, y1, z1)
 }
 \references{
-Xiong, C., G. Van Belle, et al. (2006). “Measuring and estimating
-  diagnostic accuracy when there are three ordinal diagnostic groups”. In:
-  \emph{Statistics in Medicine} 25.7, pp. 1251–1273.
+Xiong, C., G. Van Belle, et al. (2006). Measuring and estimating
+  diagnostic accuracy when there are three ordinal diagnostic groups.
+  \emph{Statistics in Medicine} 25(7), 1251–1273.
 }

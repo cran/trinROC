@@ -71,7 +71,7 @@
 #'   geom_density geom_histogram geom_jitter labs scale_colour_manual
 #'   scale_fill_manual stat_boxplot aes_string
 #' @param conf.level confidence level of the interval. A numeric value between (0,1)
-#'   yielding the significance level \eqn{\alpha=1-\code{conf.level}}.
+#'   yielding the significance level \eqn{\alpha=1-}\code{conf.level}.
 #'
 #' @return A list of class \code{"htest"} containing the following components:
 #'   \item{statistic}{the value of the chi-squared statistic.}
@@ -89,9 +89,9 @@
 #'   \item{Summary}{a data frame representing the number of NA's as well as
 #'   the means and the standard deviations per class.}
 #'
-#' @references Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2018).
+#' @references Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2019).
 #'   Inference in ROC surface analysis via a trinormal model-based testing approach.
-#'   \emph{Submitted}.
+#'   \emph{Stat}, \bold{8}(1), e249.
 #' @seealso \code{\link{trinVUS.test}}, \code{\link{boot.test}}.
 #'
 #' @export
@@ -212,9 +212,9 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   }
 
   # compute means and standard errors of Classifier 1:
-  mux1<-mean(x.1); sdx1<-SD(x.1) # healthy ind.
-  muy1<-mean(y.1); sdy1<-SD(y.1) # early diseased ind.
-  muz1<-mean(z.1); sdz1<-SD(z.1) # diseased ind.
+  mux1 <- mean(x.1); sdx1 <- SD(x.1) # healthy ind.
+  muy1 <- mean(y.1); sdy1 <- SD(y.1) # early diseased ind.
+  muz1 <- mean(z.1); sdz1 <- SD(z.1) # diseased ind.
 
   # sample size:
   nh1 <- length(x.1); nh2 <- length(x.2)
@@ -236,18 +236,18 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   #   stop(paste(c("convention of ordered classes in Classifier 1 is violated:\n",
   #        "Mean x1 = ", round(mux1,3), ", Mean y1 = ", round(muy1,3),
   #        ", Mean z1 = ", round(muz1,3)), collapse = "") ) }
-  mux2<-0; sdx2<-0
-  muy2<-0; sdy2<-0
-  muz2<-0; sdz2<-0
+  mux2 <- 0; sdx2 <- 0
+  muy2 <- 0; sdy2 <- 0
+  muz2 <- 0; sdz2 <- 0
   if (twocurves) {
 
     # compute means and standard errors of Classifier 2:
-    mux2<-mean(x.2); sdx2<-SD(x.2)
-    muy2<-mean(y.2); sdy2<-SD(y.2)
-    muz2<-mean(z.2); sdz2<-SD(z.2)
+    mux2 <- mean(x.2); sdx2 <- SD(x.2)
+    muy2 <- mean(y.2); sdy2 <- SD(y.2)
+    muz2 <- mean(z.2); sdz2 <- SD(z.2)
     if (any(c(sdx2,sdy2,sdz2) < 10 * .Machine$double.eps * abs(c(mux2,muy2,muz2)) ) )
       stop("data of Classifier 2 is essentially constant")
-    summary.dat2<- data.frame(n = c(nh2,n02,nd2), mu=c(mux2,muy2,muz2),
+    summary.dat2 <-  data.frame(n = c(nh2,n02,nd2), mu=c(mux2,muy2,muz2),
                               sd=c(sdx2,sdy2,sdz2),
                               row.names=c("healthy", "intermediate", "diseased"))
     summary.dat <- list(Classifier1 = summary.dat, Classifier2 = summary.dat2)
@@ -259,7 +259,7 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
     }
 
   # compute correlation:
-  rho.h<-0; rho.0<-0; rho.d<-0
+  rho.h <- 0; rho.0 <- 0; rho.d <- 0
   if (paired) {
     rho.h <- COV(x.1,x.2)/(sdx1*sdx2)  # correlation of healthy ind
     rho.0 <- COV(y.1,y.2)/(sdy1*sdy2)  # correlation of early disease ind
@@ -271,7 +271,7 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   B1 <- (mux1-muy1)/sdx1
   C1 <- sdy1/sdz1
   D1 <- (muz1-muy1)/sdz1
-  A2 <- 1; B2<-0; C2<-1; D2<-0 # H0 when singe marker assessment
+  A2 <- 1; B2 <- 0; C2 <- 1; D2 <- 0 # H0 when singe marker assessment
   # if (var.equal) {
   #    A2 <- A1; C2 <- C1 # consider different variances as H0
   #    method <- "Extended Metz-Kronman test for single curve assessment, adjusted sd's" }
@@ -315,7 +315,7 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
                          covAD,covBD,covCD,varD),4,4)
 
   # compute Chi-squared test statistic:
-  if (!inherits(try(solve(covariance),silent=T),"matrix")) {
+  if (!inherits(try(solve(covariance),silent=TRUE),"matrix")) {
     chi2 <- 0
     print("matrix is not invertible. Conclude complete alikeness.")
   } else {

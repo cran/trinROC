@@ -206,13 +206,13 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
                         levels = c("healthy", "intermediate", "diseased") )
     data <- data.frame(trueClass = trueClass, value = c(x,y,z))
 
-    if (sep.dens == F) {
+    if (sep.dens == FALSE) {
       # common x-axe histograms & densities:
       histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
         geom_histogram(aes_string(y ="..density.."), binwidth=(max(data$value)-min(data$value))/15,
-                       position = "dodge", alpha=0.7, show.legend = F) +
-        scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide=F) +
-        scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), name="Class") +
+                       position = "dodge", alpha=0.7, show.legend = FALSE) +
+        scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = FALSE) +
+        scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), name = "Class") +
         labs(y="Count",x=paste(Marker, "measurements")) +
         #facet_grid(. ~ trueClass, scales = "free") +
         geom_density(aes(col=trueClass), show.legend = FALSE, alpha=0.2)
@@ -221,15 +221,15 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
     } else {
       histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
         geom_histogram(aes_string(y = "..density.."),binwidth=(max(data$value)-min(data$value))/30,
-                       show.legend = F) +
+                       show.legend = FALSE) +
         scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = FALSE) +
         scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), name="Class") +
         labs(y="Density",x=paste(Marker, "measurements")) +
         facet_grid(. ~ trueClass, scales = "free") +
-        geom_density(col=2, show.legend = FALSE, fill=NA)
+        geom_density(col=2, show.legend = FALSE, fill = NA)
     }
 
-    if (scatter == F) {
+    if (scatter == FALSE) {
     # boxplots:
     meas.overview <- ggplot(data, aes_string(y="value", x="trueClass", fill = "trueClass")) +
       stat_boxplot(geom ='errorbar') + geom_boxplot() +

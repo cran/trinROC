@@ -62,7 +62,7 @@
 #' @export
 #' @references Nakas, C. T. and C. T. Yiannoutsos (2004). Ordered multiple-class
 #'  ROC analysis with continuous measurements. \emph{Statistics in
-#'  Medicine} \bold{23}(22), 3437–3449.
+#'  Medicine}, \bold{23}(22), 3437–3449.
 #' @examples
 #' data(cancer)
 #' data(krebs)
@@ -233,14 +233,14 @@ boot.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   boot.sample <- function (x, seed) {
     if (!missing(seed) & !is.null(seed))
       set.seed(seed)
-    return(sample(x, replace = T))
+    return(sample(x, replace = TRUE))
   }
 
   boot.sample2 <- function (x, seed=1){
     n <- length(x)
     if (!missing(seed) | !is.null(seed))
       set.seed(seed)
-    id <- sample(1:n, n, replace = T)
+    id <- sample(1:n, n, replace = TRUE)
     res <- x[id]
     return(list(res = res, id = id))
   }

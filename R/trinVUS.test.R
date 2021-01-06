@@ -82,7 +82,7 @@
 #'
 #' @references Xiong, C., van Belle, G.,  Miller, J. P.,  Yan, Y.,  Gao, F., Yu, K., and Morris, J. C. (2007). A parametric comparison
 #'   of diagnostic accuracy with three ordinal diagnostic groups.
-#'   \emph{Biometrical Journal}, \bold{49}(5), 682–693. \url{http://doi.org/10.1002/bimj.200610359}.
+#'   \emph{Biometrical Journal}, \bold{49}(5), 682–693. \doi{10.1002/bimj.200610359}.
 #' @examples
 #' data(cancer)
 #' data(krebs)

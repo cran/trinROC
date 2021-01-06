@@ -76,11 +76,11 @@ rocsurf.emp <- function(x,y,z, plot=TRUE, saveVUS = FALSE) {
 
     open3d( userMatrix = userMatrix, windowRect = c(0,0,550,600))
     surface3d(t1[,ncol(t1)], t2[,ncol(t2):1][1,], Z[,ncol(Z):1], color = col,
-              shade = 0.75, smooth=F, shininess = 100 )
+              shade = 0.75, smooth = FALSE, shininess = 100 )
     grid3d(c("x", "y", "z"), n =10)
-    axes3d(c("x+", "y+", "z+"), labels=T, color = "darkgray")
+    axes3d(c("x+", "y+", "z+"), labels = TRUE, color = "darkgray")
 
-    if (saveVUS == T) rgl.snapshot("empVUS.png")
+    if (saveVUS == TRUE) rgl.snapshot("empVUS.png")
   }
 
   rval <- list(t1 = t1, t2 = t2, zVUS = Z,

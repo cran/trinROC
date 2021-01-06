@@ -1,3 +1,21 @@
+# trinROC 0.5
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+* added CITATION file with Stat article
+* polishing of vignette
+* polishing of several help pages
+* proper ISSUE and BUGREPORT URL with public repository
+
+
+INTERNAL CHANGES
+
+* package now ships with `testthat.Rout.save` and `trinROC-Ex.Rout.save`
+* adapt `order()` applied to data.frames
+* minor code cleaning
+
+
+
 # trinROC 0.4
 
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -15,11 +33,14 @@ INTERNAL CHANGES
 * Minor code cleaning and brushing.
 
 
+
 # trinROC 0.3-*
 
 BUG FIXES
 
 * Addressing output in tests due to different sampling (http://developer.r-project.org/blosxom.cgi/R-devel/2019/02/26#n2019-02-26)
+
+
 
 # trinROC 0.2
 

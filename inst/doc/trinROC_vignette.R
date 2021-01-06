@@ -1,4 +1,4 @@
-## ----setup, include = FALSE, warning=FALSE-------------------------------
+## ----setup, include = FALSE, warning=FALSE------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -9,32 +9,33 @@ library(reshape)
 library(trinROC)
 options(digits=5)
 
-## ----load_data-----------------------------------------------------------
+## ----load_data----------------------------------------------------------------
 data(cancer)
 str(cancer)
 
-## ----start---------------------------------------------------------------
+## ----start--------------------------------------------------------------------
 out <- trinROC.test(dat = cancer[,c("trueClass","Class2")])
 out
 
-## ----output1-------------------------------------------------------------
+## ----output1------------------------------------------------------------------
 out[ c("estimate", "Summary", "CovMat")]
 
-## ----rocsing-------------------------------------------------------------
+## ----rocsing------------------------------------------------------------------
 ROCsin <- trinROC.test(dat = cancer[,c(1,3)])
 VUSsin <- trinVUS.test(dat = cancer[,c(1,3)])
 bootsin <- boot.test(dat = cancer[,c(1,3)], n.boot = 250)
 
 c( ROCsin$p.value, VUSsin$p.value, bootsin$p.value)
 
-## ----rocsin2-------------------------------------------------------------
+## ----rocsin2------------------------------------------------------------------
 (x1 <- with(cancer, cancer[trueClass=="healthy", 3]))
 (y1 <- with(cancer, cancer[trueClass=="intermediate", 3]))
 (z1 <- with(cancer, cancer[trueClass=="diseased", 3]))
 ROCsin2 <- trinROC.test(x1, y1, z1)
+## All numbers are equal; sole difference is name of data:
 all.equal(ROCsin, ROCsin2, check.attributes = FALSE)
 
-## ----roccomp-------------------------------------------------------------
+## ----roccomp------------------------------------------------------------------
 ROCcomp <- trinROC.test(dat = cancer[,c(1,3,5)], paired = TRUE)
 ROCcom  <- trinROC.test(dat = cancer[,c(1,3,5)])
 
@@ -47,7 +48,7 @@ z2 <- with(cancer, cancer[trueClass=="diseased", 5])
 ROCcomp2 <- trinROC.test(x1, y1, z1, x2, y2, z2, paired = TRUE)
 
 
-## ----emppow, fig.width = 6.5, fig.asp = .4-------------------------------
+## ----emppow, fig.width = 6.5, fig.asp = .4------------------------------------
 require( ggplot2, quietly = TRUE)
 require( MASS, quietly = TRUE)
 N <- 25
@@ -88,12 +89,14 @@ ggplot(data = empPow, aes(x = Vus, y = value)) + geom_line() + geom_point() +
     ylab("Empirical Power") + scale_y_continuous(breaks = c(0.05, 0.25, 0.5, 1))
 
 
-## ----roc.eda, fig.width = 6.5, fig.asp = .4------------------------------
+## ----roc.eda1, fig.width = 6.5, fig.asp = .4----------------------------------
 data( cancer)
-roc.eda(dat = cancer[,c(1,5)], type = "trinormal", plotVUS = FALSE, saveVUS = T)
-roc.eda(dat = cancer[,c(1,5)], type = "empirical", sep.dens = TRUE, scatter = TRUE, verbose = FALSE)
+roc.eda(dat = cancer[,c(1,5)], type = "trinormal", plotVUS = FALSE, saveVUS = TRUE)
 
-## is equal to:
+## ----roc.eda2, fig.width = 6.5, fig.asp = .4----------------------------------
+roc.eda(dat = cancer[,c(1,5)], type = "empirical", sep.dens = TRUE, scatter = TRUE, 
+        verbose = FALSE)
+## is last call is equal to:
 # x <- with(cancer, cancer[trueClass=="healthy", 5])
 # y <- with(cancer, cancer[trueClass=="intermediate", 5])
 # z <- with(cancer, cancer[trueClass=="diseased", 5])
@@ -102,7 +105,7 @@ roc.eda(dat = cancer[,c(1,5)], type = "empirical", sep.dens = TRUE, scatter = TR
 ## ----figs, echo = FALSE, out.width="45%", fig.lp="fig:figs", fig.cap="Empirical and trinormal ROC surfaces", fig.show='hold'----
 include_graphics(c("Figures//empVUS.png", "Figures//trinVUS.png"))
 
-## ----emp.vus-------------------------------------------------------------
+## ----emp.vus------------------------------------------------------------------
 data( cancer)
 x <- with(cancer, cancer[trueClass=="healthy", 5])
 y <- with(cancer, cancer[trueClass=="intermediate", 5])
@@ -112,18 +115,18 @@ trinVUS.test(x, y, z)$estimate
 trinROC.test(x, y, z)$estimate[1]
 
 
-## ----boxcox--------------------------------------------------------------
+## ----boxcox-------------------------------------------------------------------
 set.seed(712)
 x <- rchisq(20, 2)
 y <- rchisq(20, 6)
 z <- rchisq(20, 10)
 boxcoxROC(x, y, z)
 
-## ----roc3.test-----------------------------------------------------------
+## ----roc3.test----------------------------------------------------------------
 out <- roc3.test(cancer[,1:8], type = c("ROC", "VUS"), paired = TRUE)
 out[c(1,3)]
 
-## ----roc3.test_padjust---------------------------------------------------
+## ----roc3.test_padjust--------------------------------------------------------
 roc3.test(cancer[,1:8], type = c("ROC", "VUS"), paired = TRUE,
                     p.adjust = TRUE)$P.values$trinROC
 out$P.values$trinROC

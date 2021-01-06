@@ -16,17 +16,18 @@ See \code{vignette("Overview", package = "trinROC")} for an overview of the pack
 \references{
 Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2019).
   Inference in ROC surface analysis via a trinormal model-based testing approach.
-  \emph{Stat}, accepted.
+  \emph{Stat}, \bold{8}(1), e249.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://git.math.uzh.ch/reinhard.furrer/trinROC}
+  \item Report bugs at \url{https://git.math.uzh.ch/reinhard.furrer/trinROC/-/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Reinhard Furrer \email{reinhard.furrer@math.uzh.ch} [contributor]
+\strong{Maintainer}: Reinhard Furrer \email{reinhard.furrer@math.uzh.ch}
 
 Authors:
 \itemize{

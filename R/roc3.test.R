@@ -137,7 +137,7 @@ roc3.test <- function(dat, type = c("ROC","VUS","Bootstrap"),
       # should p adjustment be applied:
       if (p.adjust) {
         Pval <- p.adjust(na.omit(as.vector(as.matrix(trinROCPval))), method = "fdr")
-        trinROCPval[upper.tri(trinROCPval, diag=F)] <- Pval
+        trinROCPval[upper.tri(trinROCPval, diag = FALSE)] <- Pval
       }
 
       pv.comp$trinROC   <- trinROCPval
@@ -175,7 +175,7 @@ roc3.test <- function(dat, type = c("ROC","VUS","Bootstrap"),
       # should p adjustment be applied:
       if (p.adjust) {
         Pval <- p.adjust(na.omit(as.vector(as.matrix(trinVUSPval))), method = "fdr")
-        trinVUSPval[upper.tri(trinVUSPval, diag=F)] <- Pval
+        trinVUSPval[upper.tri(trinVUSPval, diag = FALSE)] <- Pval
       }
 
       pv.comp$trinVUS   <- trinVUSPval
@@ -214,7 +214,7 @@ roc3.test <- function(dat, type = c("ROC","VUS","Bootstrap"),
       # should p adjustment be applied:
       if (p.adjust) {
         Pval <- p.adjust(na.omit(as.vector(as.matrix(BootPval))), method = "fdr")
-        BootPval[upper.tri(BootPval, diag=F)] <- Pval
+        BootPval[upper.tri(BootPval, diag = FALSE)] <- Pval
       }
 
       pv.comp$Boot   <- BootPval
@@ -222,7 +222,8 @@ roc3.test <- function(dat, type = c("ROC","VUS","Bootstrap"),
     }
   }
 
-  OverviewSorted <- Overview[order(Overview[2,], decreasing = T)]
+  #  OverviewSorted <- Overview[order(Overview[2,], decreasing = T)]
+  OverviewSorted <- Overview[, order(as.numeric( Overview[2,]), decreasing = T)]
   OverviewSorted[1, ] <- 1:nclass
   OverviewSorted <- round(OverviewSorted, 4)
 

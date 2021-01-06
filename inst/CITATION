@@ -1,0 +1,20 @@
+citHeader("To cite `trinROC` in publications use:")
+
+citEntry(entry = "Article",
+  title        = "Inference in {ROC} surface analysis via a trinormal model-based testing approach",
+  author       = personList(as.person("Samuel Noll"),
+                            as.person("Reinhard Furrer"),
+                            as.person("Benjamin Reiser"),
+                            as.person("Christos T. Nakas")),
+  journal      = "Stat",
+  year         = "2019",
+  volume       = "8",
+  number       = "1",
+  pages        = "e249",
+  doi          = "10.1002/sta4.249",
+  textVersion  = paste("Noll, S., Furrer, R., Reiser, B., and Nakas C. T. (2019).",
+        "Inference in ROC surface analysis via a trinormal model-based testing approach.",
+        "Stat, 8(1), e249."),
+)
+
+

@@ -3,5 +3,5 @@
 #'   estimates by setting \code{options(trinROC.MLE = FALSE)}
 #' @references Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2019).
 #'   Inference in ROC surface analysis via a trinormal model-based testing approach.
-#'   \emph{Stat}, accepted.
+#'   \emph{Stat}, \bold{8}(1), e249.
 "_PACKAGE"

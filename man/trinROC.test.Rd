@@ -36,7 +36,7 @@ If \code{TRUE}, each class must have equal sample size for both
 classifiers.}
 
 \item{conf.level}{confidence level of the interval. A numeric value between (0,1)
-yielding the significance level \eqn{\alpha=1-\code{conf.level}}.}
+yielding the significance level \eqn{\alpha=1-}\code{conf.level}.}
 }
 \value{
 A list of class \code{"htest"} containing the following components:
@@ -121,9 +121,9 @@ z2 <- with(cancer, cancer[trueClass=="diseased", 5])
 trinROC.test(x1, y1, z1, x2, y2, z2, paired = TRUE)
 }
 \references{
-Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2018).
+Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2019).
   Inference in ROC surface analysis via a trinormal model-based testing approach.
-  \emph{Submitted}.
+  \emph{Stat}, \bold{8}(1), e249.
 }
 \seealso{
 \code{\link{trinVUS.test}}, \code{\link{boot.test}}.

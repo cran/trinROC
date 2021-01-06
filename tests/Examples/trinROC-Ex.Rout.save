@@ -1,0 +1,547 @@
+
+R Under development (unstable) (2020-12-04 r79564) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "trinROC"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('trinROC')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("boot.test")
+> ### * boot.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: boot.test
+> ### Title: Bootstrap test for three-class ROC data
+> ### Aliases: boot.test
+> 
+> ### ** Examples
+> 
+> data(cancer)
+> data(krebs)
+> 
+> # investigate a single marker:
+> boot.test(dat = krebs[,c(1,2)], n.boot=500)
+
+	Bootstrap test for single classifier assessment
+
+data:  healthy intermediate diseased of Fac1
+Z-stat = 3.8227, p-value = 0.000132
+alternative hypothesis: true Difference in VUS is not equal to 0
+sample estimates:
+VUS of Fac1 
+  0.5647059 
+
+> 
+> # result is equal to:
+> x1 <- with(krebs, krebs[trueClass=="healthy", 2])
+> y1 <- with(krebs, krebs[trueClass=="intermediate", 2])
+> z1 <- with(krebs, krebs[trueClass=="diseased", 2])
+> 
+> # comparison of marker 2 and 6:
+> 
+> # result is equal to:
+> x2 <- with(krebs, krebs[trueClass=="healthy", 5])
+> y2 <- with(krebs, krebs[trueClass=="intermediate", 5])
+> z2 <- with(krebs, krebs[trueClass=="diseased", 5])
+> 
+> 
+> 
+> cleanEx()
+> nameEx("boxcoxROC")
+> ### * boxcoxROC
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: boxcoxROC
+> ### Title: Box-Cox transformation on three-class ROC data
+> ### Aliases: boxcoxROC
+> 
+> ### ** Examples
+> 
+> data(cancer)
+> x1 <- with(cancer, cancer[trueClass=="healthy", 9])
+> y1 <- with(cancer, cancer[trueClass=="intermediate", 9])
+> z1 <- with(cancer, cancer[trueClass=="diseased", 9])
+> 
+> boxcoxROC(x1, y1, z1)
+--------------------------------------------------------------------- 
+ Optimal lambda       = 2
+ Shift param. lambda2 = 0
+
+ Shapiro p-values for original data: 
+ x = 0.07584068, y = 0.9498752, z = 0.3545137
+
+ Shapiro p-values for Box-Cox transformed data: 
+ x = 0.08442367, y = 0.9398613, z = 0.3688632
+--------------------------------------------------------------------- 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("emp.vus")
+> ### * emp.vus
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: emp.vus
+> ### Title: Empirical VUS calculation
+> ### Aliases: emp.vus
+> 
+> ### ** Examples
+> 
+> data(krebs)
+> x1 <- with(krebs, cancer[trueClass=="healthy", 4])
+> y1 <- with(krebs, cancer[trueClass=="intermediate", 4])
+> z1 <- with(krebs, cancer[trueClass=="diseased", 4])
+> 
+> emp.vus(x1, y1, z1)
+[1] 0.1250848
+> # Alternatively:
+> emp.vus(dat = krebs[,c(1,4)])
+[1] 0.5451357
+> 
+> 
+> 
+> cleanEx()
+> nameEx("findmu")
+> ### * findmu
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: findmu
+> ### Title: Determine equidistant means of trinormal ROC data simulation
+> ### Aliases: findmu
+> 
+> ### ** Examples
+> 
+> # find equidistant means with mux=2.7 and VUS = 0.45:
+> findmu(mux = 2.7, VUS = 0.45)
+  Par     Coeff
+1 mux 2.7000000
+2 muy 2.6230000
+3 muz 5.2460000
+4 VUS 0.4500725
+> # specify standard errors:
+> findmu(mux = 2.7, sdx = 1.1, sdy = 1.3, sdz = 1.5, VUS = 0.45)
+  Par     Coeff
+1 mux 2.7000000
+2 muy 2.7840000
+3 muz 5.5680000
+4 VUS 0.4501836
+> 
+> 
+> 
+> cleanEx()
+> nameEx("roc.eda")
+> ### * roc.eda
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: roc.eda
+> ### Title: Exploratory data analysis for a three-class ROC marker
+> ### Aliases: roc.eda
+> 
+> ### ** Examples
+> 
+> data(krebs)
+> 
+> # empirical EDA:
+> roc.eda(dat = krebs[,c(1,5)], type = "e", plotVUS = FALSE)
+
+ Data overview of empirical ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied test: Bootstrap test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: healthy, intermediate and diseased
+
+Boot statistic: 1.5, Boot p.value: 0.13365
+
+ empirical VUS:  0.283 
+--------------------------------------------------------------------- 
+> 
+> # equal data input via:
+> x <- with(krebs, krebs[trueClass=="healthy", 5])
+> y <- with(krebs, krebs[trueClass=="intermediate", 5])
+> z <- with(krebs, krebs[trueClass=="diseased", 5])
+> roc.eda(x, y, z, type = "e", sep.dens = TRUE)
+
+ Data overview of empirical ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied test: Bootstrap test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: x, y and z
+
+Boot statistic: 1.5, Boot p.value: 0.13365
+
+ empirical VUS:  0.283 
+--------------------------------------------------------------------- 
+> 
+> data(cancer)
+> # trinormal EDA:
+> roc.eda(dat = cancer[,c(1,10)], type = "trin", plotVUS = FALSE)
+
+ Data overview of trinormal ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied tests: Trinormal based ROC and VUS test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: healthy, intermediate and diseased
+
+ROC test statistic: 37.764, ROC p.value: 0
+ VUS test statistic:  4.159 ,  VUS p.value:  3e-05 
+
+ trinormal VUS:  0.391 
+
+Parameters: 
+ 	a	b	c	d	
+ 	1.3029	-0.4654	1.0088	0.9491	
+--------------------------------------------------------------------- 
+> # trinormal EDA with different plots:
+> roc.eda(dat = cancer[,c(1,5)], type = "t", sep.dens = TRUE, scatter = TRUE)
+
+ Data overview of trinormal ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied tests: Trinormal based ROC and VUS test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: healthy, intermediate and diseased
+
+ROC test statistic: 25.421, ROC p.value: 4e-05
+ VUS test statistic:  3.418 ,  VUS p.value:  0.00063 
+
+ trinormal VUS:  0.344 
+
+Parameters: 
+ 	a	b	c	d	
+ 	1.3766	-1.1808	1.101	0.1951	
+--------------------------------------------------------------------- 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("roc3.test")
+> ### * roc3.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: roc3.test
+> ### Title: Statistical test function for computing multiple tests on
+> ###   three-class ROC data
+> ### Aliases: roc3.test
+> 
+> ### ** Examples
+> 
+> data(krebs)
+> roc3.test(krebs, type = c("ROC", "VUS"), paired = TRUE)[c("Overview","P.values")]
+$Overview
+                   Fac1   Fac3   Fac2   Fac4
+Charts           1.0000 2.0000 3.0000 4.0000
+Emp. VUS         0.5647 0.5451 0.3934 0.2830
+Trin. VUS        0.4742 0.5481 0.3733 0.3077
+p.value ROC test 0.0000 0.0000 0.0009 0.0047
+p.value VUS test 0.0006 0.0000 0.0079 0.0440
+Nr. of NA's      0.0000 0.0000 0.0000 0.0000
+
+$P.values
+$P.values$trinROC
+     Fac1     Fac2        Fac3       Fac4
+Fac1   NA 0.327021 0.001143259 0.02361469
+Fac2   NA       NA 0.039195104 0.33410345
+Fac3   NA       NA          NA 0.03605134
+Fac4   NA       NA          NA         NA
+
+$P.values$trinVUS
+     Fac1      Fac2      Fac3       Fac4
+Fac1   NA 0.2689015 0.5817586 0.15087236
+Fac2   NA        NA 0.1258723 0.49200409
+Fac3   NA        NA        NA 0.03544401
+Fac4   NA        NA        NA         NA
+
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rocsurf.emp")
+> ### * rocsurf.emp
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rocsurf.emp
+> ### Title: Empirical ROC surface plot
+> ### Aliases: rocsurf.emp
+> 
+> ### ** Examples
+> 
+> data(cancer)
+> x1 <- with(cancer, cancer[trueClass=="healthy", 9])
+> y1 <- with(cancer, cancer[trueClass=="intermediate", 9])
+> z1 <- with(cancer, cancer[trueClass=="diseased", 9])
+> 
+> rocsurf.emp(x1, y1, z1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rocsurf.trin")
+> ### * rocsurf.trin
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rocsurf.trin
+> ### Title: Trinormal ROC surface plot
+> ### Aliases: rocsurf.trin
+> 
+> ### ** Examples
+> 
+> data(cancer)
+> x1 <- with(cancer, cancer[trueClass=="healthy", 8])
+> y1 <- with(cancer, cancer[trueClass=="intermediate", 8])
+> z1 <- with(cancer, cancer[trueClass=="diseased", 8])
+> 
+> rocsurf.trin(x1, y1, z1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("trinROC.test")
+> ### * trinROC.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: trinROC.test
+> ### Title: Trinormal based ROC test
+> ### Aliases: trinROC.test
+> 
+> ### ** Examples
+> 
+> data(cancer)
+> data(krebs)
+> 
+> # investigate a single marker:
+> trinROC.test(dat = cancer[,c(1,3)])
+
+	Trinormal based ROC test for single classifier assessment
+
+data:  healthy  intermediate  diseased  of  Class2
+Chi-Squared test = 47.105, df = 4, p-value = 1.45e-09
+alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
+sample estimates:
+             VUS        a        b        c         d
+Class2 0.4158225 1.837083 -1.23332 0.843642 0.5600527
+
+> trinROC.test(dat = krebs[,c(1,5)])
+
+	Trinormal based ROC test for single classifier assessment
+
+data:  healthy  intermediate  diseased  of  Fac4
+Chi-Squared test = 15.006, df = 4, p-value = 0.004688
+alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
+sample estimates:
+           VUS       a         b         c         d
+Fac4 0.3076774 1.45496 -0.314366 0.8000247 0.5608057
+
+> 
+> # result is equal to:
+> x1 <- with(cancer, cancer[trueClass=="healthy", 3])
+> y1 <- with(cancer, cancer[trueClass=="intermediate", 3])
+> z1 <- with(cancer, cancer[trueClass=="diseased", 3])
+> trinROC.test(x1, y1, z1)
+
+	Trinormal based ROC test for single classifier assessment
+
+data:  x1 y1 and z1
+Chi-Squared test = 47.105, df = 4, p-value = 1.45e-09
+alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
+sample estimates:
+                   VUS        a        b        c         d
+Classifier1: 0.4158225 1.837083 -1.23332 0.843642 0.5600527
+
+> 
+> # comparison of marker 2 and 6:
+> trinROC.test(dat = cancer[,c(1,3,5)], paired = TRUE)
+
+	Trinormal based ROC test for comparison of paired ROC surfaces
+
+data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
+Chi-Squared test = 10.381, df = 4, p-value = 0.03448
+alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
+sample estimates:
+             VUS        a         b        c         d
+Class2 0.4158225 1.837083 -1.233320 0.843642 0.5600527
+Class4 0.3436110 1.376642 -1.180839 1.100997 0.1951308
+
+> trinROC.test(dat = cancer[,c(1,3,5)], paired = FALSE)
+
+	Trinormal based ROC test for comparison of two independent classifiers
+
+data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
+Chi-Squared test = 6.9723, df = 4, p-value = 0.1374
+alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
+sample estimates:
+             VUS        a         b        c         d
+Class2 0.4158225 1.837083 -1.233320 0.843642 0.5600527
+Class4 0.3436110 1.376642 -1.180839 1.100997 0.1951308
+
+> 
+> # result is equal to:
+> x2 <- with(cancer, cancer[trueClass=="healthy", 5])
+> y2 <- with(cancer, cancer[trueClass=="intermediate", 5])
+> z2 <- with(cancer, cancer[trueClass=="diseased", 5])
+> trinROC.test(x1, y1, z1, x2, y2, z2, paired = TRUE)
+
+	Trinormal based ROC test for comparison of paired ROC surfaces
+
+data:  x1 y1 z1 and x2 y2 z2
+Chi-Squared test = 10.381, df = 4, p-value = 0.03448
+alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
+sample estimates:
+                   VUS        a         b        c         d
+Classifier1: 0.4158225 1.837083 -1.233320 0.843642 0.5600527
+Classifier2: 0.3436110 1.376642 -1.180839 1.100997 0.1951308
+
+> 
+> 
+> 
+> cleanEx()
+> nameEx("trinVUS.test")
+> ### * trinVUS.test
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: trinVUS.test
+> ### Title: Trinormal VUS test
+> ### Aliases: trinVUS.test
+> 
+> ### ** Examples
+> 
+> data(cancer)
+> data(krebs)
+> 
+> # investigate a single marker:
+> trinVUS.test(dat = cancer[,c(1,3)])
+
+	Trinormal VUS test for single classifier assessment
+
+data:  healthy intermediate diseased of Class2
+Z-stat = 4.4732, p-value = 7.704e-06
+alternative hypothesis: true Difference in VUS is not equal to 0
+sample estimates:
+VUS of Class2 
+    0.4158225 
+
+> trinVUS.test(dat = krebs[,c(1,5)])
+
+	Trinormal VUS test for single classifier assessment
+
+data:  healthy intermediate diseased of Fac4
+Z-stat = 2.0139, p-value = 0.04402
+alternative hypothesis: true Difference in VUS is not equal to 0
+sample estimates:
+VUS of Fac4 
+  0.3076774 
+
+> 
+> # result is equal to:
+> x1 <- with(cancer, cancer[trueClass=="healthy", 3])
+> y1 <- with(cancer, cancer[trueClass=="intermediate", 3])
+> z1 <- with(cancer, cancer[trueClass=="diseased", 3])
+> trinVUS.test(x1, y1, z1)
+
+	Trinormal VUS test for single classifier assessment
+
+data:  x1 y1 and z1
+Z-stat = 4.4732, p-value = 7.704e-06
+alternative hypothesis: true Difference in VUS is not equal to 0
+sample estimates:
+VUS of Classifier 1 
+          0.4158225 
+
+> 
+> # comparison of marker 2 and 6:
+> trinVUS.test(dat = cancer[,c(1,3,5)], paired = TRUE)
+
+	Trinormal VUS test for comparison of paired ROC data
+
+data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
+Z-stat = 1.2496, p-value = 0.2114
+alternative hypothesis: true Difference in VUS is not equal to 0
+sample estimates:
+VUS of Class2 VUS of Class4 
+    0.4158225     0.3436110 
+
+> trinVUS.test(dat = cancer[,c(1,3,5)], paired = FALSE)
+
+	Trinormal VUS test for comparison of two independent classifiers
+
+data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
+Z-stat = 0.94961, p-value = 0.3423
+alternative hypothesis: true Difference in VUS is not equal to 0
+sample estimates:
+VUS of Class2 VUS of Class4 
+    0.4158225     0.3436110 
+
+> 
+> # result is equal to:
+> x2 <- with(cancer, cancer[trueClass=="healthy", 5])
+> y2 <- with(cancer, cancer[trueClass=="intermediate", 5])
+> z2 <- with(cancer, cancer[trueClass=="diseased", 5])
+> trinVUS.test(x1, y1, z1, x2, y2, z2, paired = TRUE)
+
+	Trinormal VUS test for comparison of paired ROC data
+
+data:  x1 y1 z1 and x2 y2 z2
+Z-stat = 1.2496, p-value = 0.2114
+alternative hypothesis: true Difference in VUS is not equal to 0
+sample estimates:
+VUS of Classifier 1 VUS of Classifier 2 
+          0.4158225           0.3436110 
+
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  5.361 0.16 5.869 0.005 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

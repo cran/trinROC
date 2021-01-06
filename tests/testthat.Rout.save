@@ -1,0 +1,60 @@
+
+R Under development (unstable) (2020-12-04 r79564) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> if (require("testthat", character.only = TRUE)) {
++   test_check("trinROC")
++ }
+Loading required package: testthat
+Loading required package: trinROC
+
+ Data overview of empirical ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied test: Bootstrap test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: D-, D0 and D+
+
+Boot statistic: 1.144, Boot p.value: 0.25256
+
+ empirical VUS:  0.368 
+--------------------------------------------------------------------- 
+
+ Data overview of trinormal ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied tests: Trinormal based ROC and VUS test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: D-, D0 and D+
+
+ROC test statistic: 8.321, ROC p.value: 0.08051
+ VUS test statistic:  0.868 ,  VUS p.value:  0.38533 
+
+ trinormal VUS:  0.278 
+
+Parameters: 
+ 	a	b	c	d	
+ 	0.6959	-0.2546	0.4462	0.1083	
+--------------------------------------------------------------------- 
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 43 ]
+> 
+> proc.time()
+   user  system elapsed 
+  4.781   0.160   4.953 

@@ -24,9 +24,9 @@ options(digits=5)
 ```
 
 
-The package `trinROC` helps to assess three-class Receiver Operating Characteristic (ROC) type data. It provides functions for three statistical tests as described in @noll201x along with functions for Exploratory Data Analysis (EDA) and visualization. 
+The package `trinROC` helps to assess three-class Receiver Operating Characteristic (ROC) type data. It provides functions for three statistical tests as described in @noll2019 along with functions for Exploratory Data Analysis (EDA) and visualization. 
 
-We assume that the reader has some background in ROC analysis as well as some understanding of the terminology associated with Area Under the ROC Curve (AUC) and Volume Under the ROC Surface (VUS) indices. See @nakas2014 or @noll201x for a concise overview. 
+We assume that the reader has some background in ROC analysis as well as some understanding of the terminology associated with Area Under the ROC Curve (AUC) and Volume Under the ROC Surface (VUS) indices. See @nakas2014 or @noll2019 for a concise overview. 
 
 This vignette consists of the following parts:
 
@@ -44,7 +44,7 @@ The package also contains two small data sets `cancer` and `krebs` mimicking res
 
 We assume a three-class setting, where one or more classifier yields measurements $X = x$ on a continuous scale for the groups of healthy ($D^-$), intermediate ($D^0$) and diseased ($D^+$) individuals. By convention, larger values of $x$ represent a more severe status of the disease. The package `trinROC` provides statistical tests to assess the discriminatory power of such classifiers. These tests are: 
 
-* Trinormal based ROC test (`trinROC.test`), developed by @noll201x;
+* Trinormal based ROC test (`trinROC.test`), developed by @noll2019;
 * Trinormal VUS test (`trinVUS.test`), developed by @xiong2007;
 * Bootstrap test, (`boot.test`), developed by @nakas2004.
 
@@ -118,7 +118,7 @@ data(cancer)
 str(cancer)
 ```
 
-The first column is a factor indicating the (true) class membership of each individual. The three levels have to be ordered accoring to heavyness of disease, i.e., healthy, intermediate and diseased (nor the names nor the sorting of the elements plays a role). The other columns contain the measurements yielded by Classifier 1 to 9. Further we note that some columns where multiplied by $(-1)$ in order to fulfill the convention that more diseased individuals have (in general) higher measurements.
+The first column is a factor indicating the (true) class membership of each individual. The three levels have to be ordered according to heaviness of disease, i.e., healthy, intermediate and diseased (nor the names nor the sorting of the elements plays a role). The other columns contain the measurements yielded by Classifier 1 to 9. Further we note that some columns where multiplied by $-1$ in order to fulfill the convention that more diseased individuals have (in general) higher measurements.
 
 
 ## Single marker assessment
@@ -157,6 +157,7 @@ The test functions `trinROC.test`, `trinVUS.test` and `boot.test` handle either 
 (y1 <- with(cancer, cancer[trueClass=="intermediate", 3]))
 (z1 <- with(cancer, cancer[trueClass=="diseased", 3]))
 ROCsin2 <- trinROC.test(x1, y1, z1)
+## All numbers are equal; sole difference is name of data:
 all.equal(ROCsin, ROCsin2, check.attributes = FALSE)
 ```
 
@@ -247,12 +248,14 @@ The function `roc.eda` serves this purpose and provides three different viewpoin
 
 The last option can be turned off by setting `plotVUS = FALSE`. If only the interactive three-dimensional plot is desired, one can also use the functions `rocsurf.emp` for empirical ROC surfaces and `rocsurf.trin` for trinormal ROC surfaces.
 
-```{r roc.eda, fig.width = 6.5, fig.asp = .4}
+```{r roc.eda1, fig.width = 6.5, fig.asp = .4}
 data( cancer)
-roc.eda(dat = cancer[,c(1,5)], type = "trinormal", plotVUS = FALSE, saveVUS = T)
-roc.eda(dat = cancer[,c(1,5)], type = "empirical", sep.dens = TRUE, scatter = TRUE, verbose = FALSE)
-
-## is equal to:
+roc.eda(dat = cancer[,c(1,5)], type = "trinormal", plotVUS = FALSE, saveVUS = TRUE)
+```
+```{r roc.eda2, fig.width = 6.5, fig.asp = .4}
+roc.eda(dat = cancer[,c(1,5)], type = "empirical", sep.dens = TRUE, scatter = TRUE, 
+        verbose = FALSE)
+## is last call is equal to:
 # x <- with(cancer, cancer[trueClass=="healthy", 5])
 # y <- with(cancer, cancer[trueClass=="intermediate", 5])
 # z <- with(cancer, cancer[trueClass=="diseased", 5])

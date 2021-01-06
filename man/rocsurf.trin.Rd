@@ -20,7 +20,7 @@ working directory (default is \code{FALSE}).}
 }
 \value{
 A list with the following components:
-\item{t1, t2}{The vectors \eqn{t_-=F_-^{(c_-)}} and \eqn{t_+=F_+^{(c_+)}}}
+  \item{t1, t2}{The vectors \eqn{t_-=F_-^{(c_-)}} and \eqn{t_+=F_+^{(c_+)}}}
   \item{zVUS}{The matix containing the surface values.}
   \item{x, y, z}{The original data.}
 }

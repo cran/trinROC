@@ -111,7 +111,7 @@ z2 <- with(krebs, krebs[trueClass=="diseased", 5])
 \references{
 Nakas, C. T. and C. T. Yiannoutsos (2004). Ordered multiple-class
  ROC analysis with continuous measurements. \emph{Statistics in
- Medicine} \bold{23}(22), 3437–3449.
+ Medicine}, \bold{23}(22), 3437–3449.
 }
 \seealso{
 \code{\link{trinROC.test}}, \code{\link{trinVUS.test}}.

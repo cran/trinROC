@@ -19,7 +19,7 @@
 #'@param saveVUS A logical whether to save a PNG of the VUS in your current
 #'  working directory (default is \code{FALSE}).
 #'@return A list with the following components:
-#'\item{t1, t2}{The vectors \eqn{t_-=F_-^{(c_-)}} and \eqn{t_+=F_+^{(c_+)}}}
+#'   \item{t1, t2}{The vectors \eqn{t_-=F_-^{(c_-)}} and \eqn{t_+=F_+^{(c_+)}}}
 #'   \item{zVUS}{The matix containing the surface values.}
 #'   \item{x, y, z}{The original data.}
 #'
@@ -100,11 +100,11 @@ rocsurf.trin <- function(x, y, z, p=300, plot = TRUE, saveVUS = FALSE) {
 
     open3d( userMatrix = userMatrix, windowRect = c(0,0,550,600))
     surface3d(t1, t2, Z, color = col,
-              shade = 0.75, smooth=F, shininess = 100 )
+              shade = 0.75, smooth = FALSE, shininess = 100 )
     grid3d(c("x", "y", "z"), n =10)
-    axes3d(c("x+", "y+", "z+"), labels=T, color = "darkgray")
+    axes3d(c("x+", "y+", "z+"), labels = TRUE, color = "darkgray")
 
-    if (saveVUS == T) rgl.snapshot("trinVUS.png")
+    if (saveVUS == TRUE) rgl.snapshot("trinVUS.png")
   }
   rval <- list(t1 = t1, t2 = t2, zVUS = Z,
                x = x, y = y, z = z)

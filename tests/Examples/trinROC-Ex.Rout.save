@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2020-12-04 r79564) -- "Unsuffered Consequences"
-Copyright (C) 2020 The R Foundation for Statistical Computing
+R Under development (unstable) (2021-05-23 r80364) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -535,7 +535,7 @@ VUS of Classifier 1 VUS of Classifier 2
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  5.361 0.16 5.869 0.005 0 
+Time elapsed:  5.689 0.105 6.06 0.001 0.001 
 > grDevices::dev.off()
 null device 
           1 

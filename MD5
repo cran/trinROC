@@ -1,4 +1,4 @@
-08ee00ad3527271b2ab01f19612f6f66 *DESCRIPTION
+b7687d325b8328d5e3981821b829dde5 *DESCRIPTION
 c2045504d0aa0f33e4ec0216cae7c575 *NAMESPACE
 d5e0e125a72927860f6be6d092f4e685 *NEWS.md
 2c58075bfeff1f6014a32d7b583016d9 *R/SD_VAR.R
@@ -8,7 +8,7 @@ d5e0e125a72927860f6be6d092f4e685 *NEWS.md
 40ef7accc99ce2c3ac7f62c41b70646f *R/emp.vus.R
 707363850797427cca3c4fa65af19694 *R/findmu.R
 279c35c6debeec760aaf824f168d441c *R/krebs.R
-e6fedacd41c1c5e6f4f9cf3052f897a6 *R/roc.eda.R
+8a35658a61f348a00156d4aa256df830 *R/roc.eda.R
 5a2671f1b35c55f0dd679eacb07a6dbd *R/roc3.test.R
 95efdbbaf3dff14049aed1a7610e2d17 *R/rocsurf.emp.R
 12d4015de1f44064e753c4d06789c6f9 *R/rocsurf.trin.R
@@ -16,14 +16,14 @@ e6fedacd41c1c5e6f4f9cf3052f897a6 *R/roc.eda.R
 7b3e1594ece2645d8226c5c93b94fac1 *R/trinROC.test.R
 c04b17624f33c08d1b2371541b4e1373 *R/trinVUS.test.R
 d786612f5689df90c0af951eb93a86c3 *R/zzz.R
-101e75ed886837f1b423794aa3d9afc9 *build/partial.rdb
-80511ace7a0b62a641b8f3a3a1a9a7ba *build/vignette.rds
+54f3116a4951ff4b11da3a59878d5913 *build/partial.rdb
+ed09411c2ede014e890a33873072d588 *build/vignette.rds
 cd56cdd62d6cec400c18b2021b1bd8b8 *data/cancer.RData
 069d450aa4f4e35e37f3538337991e80 *data/krebs.RData
 7153232489303e70611c4a93349397e1 *inst/CITATION
 70859f2730f3da902cacdca38ae9bf2a *inst/doc/trinROC_vignette.R
 8c0ecd7f8624daf83335d0f71900cbe4 *inst/doc/trinROC_vignette.Rmd
-e71363f1509c4ee5e1b49814e2fdc09f *inst/doc/trinROC_vignette.html
+9f5d5d97930d24a4ddf4eba12bce376b *inst/doc/trinROC_vignette.html
 38548d713aa708b53eb97ac4fadf259c *man/boot.test.Rd
 a1758c1270c6417f068d54a1c524a793 *man/boxcoxROC.Rd
 077fe068bc922167efb3b43b14ae5220 *man/cancer.Rd
@@ -37,9 +37,9 @@ c8d21abdea0aa9769324b1de777a523b *man/rocsurf.trin.Rd
 efa547c23591bb2fb896c1ca518274cb *man/trinROC-package.Rd
 af3fcd645145f05eef34fa6e505b21e4 *man/trinROC.test.Rd
 d0543eae2d1c5bb3afadf3813e4c7b57 *man/trinVUS.test.Rd
-0e0b0302e9d98a4f2772f53ec643e89a *tests/Examples/trinROC-Ex.Rout.save
+5e025fa937ea94e66afd3a31b20cde75 *tests/Examples/trinROC-Ex.Rout.save
 ffe5b9f34b215b35ddbece72a23da16a *tests/testthat.R
-ef944e402b6bd01d9a76db9cf6e0f4bb *tests/testthat.Rout.save
+7b91c32a2fd2c7153f63beeb9e55a14b *tests/testthat.Rout.save
 276ecaeba6fc8950048dafbea783c246 *tests/testthat/test_trinROC.R
 f26293da0ae1892706eaf319115f111d *vignettes/Figures/empVUS.png
 2678907e906a234125124d0a1dc72298 *vignettes/Figures/trinVUS.png

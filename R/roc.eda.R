@@ -211,7 +211,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
       histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
         geom_histogram(aes_string(y ="..density.."), binwidth=(max(data$value)-min(data$value))/15,
                        position = "dodge", alpha=0.7, show.legend = FALSE) +
-        scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = FALSE) +
+        scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
         scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), name = "Class") +
         labs(y="Count",x=paste(Marker, "measurements")) +
         #facet_grid(. ~ trueClass, scales = "free") +
@@ -222,7 +222,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
       histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
         geom_histogram(aes_string(y = "..density.."),binwidth=(max(data$value)-min(data$value))/30,
                        show.legend = FALSE) +
-        scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = FALSE) +
+        scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
         scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), name="Class") +
         labs(y="Density",x=paste(Marker, "measurements")) +
         facet_grid(. ~ trueClass, scales = "free") +
@@ -233,14 +233,14 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
     # boxplots:
     meas.overview <- ggplot(data, aes_string(y="value", x="trueClass", fill = "trueClass")) +
       stat_boxplot(geom ='errorbar') + geom_boxplot() +
-      scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = FALSE) +
+      scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
       coord_flip() + labs(x="", y=paste(Marker, "measurements"))
 
     } else {
     # scattter plot of data:
     meas.overview <- ggplot(data, aes_string(y="value", x="trueClass", color = "trueClass")) +
       geom_jitter(width = 0.25) +
-      scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = FALSE) +
+      scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
         coord_flip() + labs(x="", y=paste(Marker, "measurements"))
     }
 

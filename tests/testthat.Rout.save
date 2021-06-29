@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2020-12-04 r79564) -- "Unsuffered Consequences"
-Copyright (C) 2020 The R Foundation for Statistical Computing
+R Under development (unstable) (2021-05-23 r80364) -- "Unsuffered Consequences"
+Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -57,4 +57,4 @@ Parameters:
 > 
 > proc.time()
    user  system elapsed 
-  4.781   0.160   4.953 
+  5.297   0.111   5.399 

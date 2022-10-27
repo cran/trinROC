@@ -96,7 +96,7 @@ roc.eda(dat = cancer[,c(1,5)], type = "trinormal", plotVUS = FALSE, saveVUS = TR
 ## ----roc.eda2, fig.width = 6.5, fig.asp = .4----------------------------------
 roc.eda(dat = cancer[,c(1,5)], type = "empirical", sep.dens = TRUE, scatter = TRUE, 
         verbose = FALSE)
-## is last call is equal to:
+## last call is equal to:
 # x <- with(cancer, cancer[trueClass=="healthy", 5])
 # y <- with(cancer, cancer[trueClass=="intermediate", 5])
 # z <- with(cancer, cancer[trueClass=="diseased", 5])

@@ -62,12 +62,12 @@
 #' @param paired a logical indicating whether data arose from a paired setting.
 #'   If \code{TRUE}, each class must have equal sample size for both
 #'   classifiers.
-#' @importFrom stats complete.cases cor cov sd dnorm integrate na.omit nlm
+#' @importFrom stats complete.cases cor cov sd dnorm integrate na.omit nlm density
 #' pchisq pnorm qchisq qnorm var p.adjust shapiro.test
 #' @importFrom grDevices cm.colors
 #' @importFrom rgl open3d surface3d grid3d axes3d rgl.snapshot
 #' @importFrom gridExtra grid.arrange
-#' @importFrom ggplot2 ggplot  aes coord_flip facet_grid geom_boxplot
+#' @importFrom ggplot2 ggplot  aes coord_flip facet_grid geom_boxplot after_stat
 #'   geom_density geom_histogram geom_jitter labs scale_colour_manual
 #'   scale_fill_manual stat_boxplot aes_string
 #' @param conf.level confidence level of the interval. A numeric value between (0,1)
@@ -142,7 +142,7 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
            the first column and marker measurements at the second and third column.")
     if (any(sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")) ) {
       for (i in 1 : (ncol(dat)-1)) {
-        if (class(dat[, i+1])!="numeric") dat[,(i+1)] <- as.numeric(dat[,(i+1)]) }
+        if (!inherits(dat[, i+1],"numeric")) dat[,(i+1)] <- as.numeric(dat[,(i+1)]) }
       warning("Some measurements were not numeric. Forced to numeric.")
     }
 
@@ -352,7 +352,7 @@ trinROC.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   # naming estimates:
   if (!is.null(dat)) {
     rownames(param)[1]   <- names(dat)[2]
-    if (class(summary.dat)=="list") names(summary.dat)[1] <- names(dat)[2]
+    if (inherits(summary.dat,"list")) names(summary.dat)[1] <- names(dat)[2]
     if (ncol(dat) > 2) {
       rownames(param)[2] <- names(dat)[3]
       names(summary.dat)[2] <- names(dat)[3] }

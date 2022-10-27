@@ -4,10 +4,11 @@
 ## Document created: 21/12/2017
 ## Last modified   : ././2018 Descripiton
 ##                 : RF: 26/05/2019 adapt seed change
+##                 : AC: 20/10/2022 adapt SD() and VAR() changes
 ###############################################################################
 ##Purpose: Test the trinROC package.
 
-seedvalues <- if (R.version$minor<6 & R.version$major<4) c(.24,.537,1.163) else c(.25,.534,1.144)
+seedvalues <- if (R.version$minor<6 & R.version$major<4) c(.24,.537,1.163) else c(.25,.534,1.145)
 
 # In this file we test all functions of trinROC.
 # Each function is embedded in one context().
@@ -62,7 +63,7 @@ test_that("trinVUS.test() function", {
   # test perfect discrimination (cs):
   temp <- trinVUS.test(dat = dat[,c(1,5)])
   expect_equal(round(temp$p.value,3), 0)
-  expect_equal(unname(round(temp$estimate[1],3)), 0.926)
+  expect_equal(unname(round(temp$estimate[1],3)), 0.988)
 
   # test uniformative case (cp):
   temp <- trinVUS.test(dat = dat[,c(1,4)])
@@ -71,13 +72,13 @@ test_that("trinVUS.test() function", {
 
   # test sampled data, single assessment:
   temp <- trinVUS.test(dat = dat[,1:2])
-  expect_equal(round(temp$p.value,2), 0.39)
-  expect_equal(unname(round(temp$estimate[1],3)), 0.278)
+  expect_equal(round(temp$p.value,2), 0.3)
+  expect_equal(unname(round(temp$estimate[1],3)), 0.306)
 
   # test sampled data, comparison of markers:
   temp <- trinVUS.test(dat = dat[,1:3])
-  expect_equal(round(temp$p.value,2), 0.6)
-  expect_equal(unname(round(temp$statistic,3)), 0.531)
+  expect_equal(round(temp$p.value,2), 0.66)
+  expect_equal(unname(round(temp$statistic,3)), 0.445)
 })
 
 
@@ -86,7 +87,7 @@ test_that("trinROC.test() function", {
   # test perfect discrimination (cs):
   temp <- trinROC.test(dat = dat[,c(1,5)])
   expect_equal(round(temp$p.value,3), 0)
-  expect_equal(unname(round(temp$statistic,3)), 20.426)
+  expect_equal(unname(round(temp$statistic,3)), 24.194)
 
   # test uniformative case (cp):
   temp <- trinROC.test(dat = dat[,c(1,4)])
@@ -95,15 +96,15 @@ test_that("trinROC.test() function", {
 
   # test sampled data, single assessment:
   temp <- trinROC.test(dat = dat[,1:2])
-  expect_equal(round(temp$p.value,2), 0.08)
+  expect_equal(round(temp$p.value,2), 0.07)
   # check arbitrarily parameter A:
   expect_equal(as.numeric(round(temp$estimate[2],3)), 0.696)
 
   # test sampled data, comparison of markers:
   temp <- trinROC.test(dat = dat[,1:3])
-  expect_equal(round(temp$p.value,2), 0.45)
+  expect_equal(round(temp$p.value,2), 0.44)
   # check arbitrarily parameter D2:
-  expect_equal(round(temp$estimate[2,5],3), 0.103)
+  expect_equal(round(temp$estimate[2,5],3), 0.144)
 })
 
 
@@ -115,12 +116,12 @@ test_that("roc.eda(), whole functionality", {
   temp <- roc.eda(dat = dat[,1:2], plotVUS = FALSE)
   expect_equal(unname(round(temp$statistic,3)), seedvalues[3])
   expect_equal(unname(temp$VUS), 0.368)
-  expect_equal(unname(round(temp$dat.summary[1,3],3)), 1.201)
+  expect_equal(unname(round(temp$dat.summary[1,3],3)), 0.86)
 
   temp <- roc.eda(dat = dat[,1:2], type = "t", plotVUS = FALSE)
-  expect_equal(unname(round(temp$statistic,3)), c(8.321,0.868))
-  expect_equal(unname(round(temp$VUS,3)), 0.278)
-  expect_equal(unname(round(temp$dat.summary[1,3],3)), 1.201)
+  expect_equal(unname(round(temp$statistic,3)), c(8.690,1.041))
+  expect_equal(unname(round(temp$VUS,3)), 0.306)
+  expect_equal(unname(round(temp$dat.summary[1,3],3)), 0.86)
 
 })
 
@@ -137,7 +138,7 @@ test_that("rocsurf.emp(), whole functionality", {
 test_that("rocsurf.trin(), whole functionality", {
 
   temp <- rocsurf.trin(x1,y1,z1, plot=FALSE)
-  expect_equal(round(temp$zVUS[1,133],3), 0.865)
+  expect_equal(round(temp$zVUS[1,133],3), 0.904)
 
 })
 

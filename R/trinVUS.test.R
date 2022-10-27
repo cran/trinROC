@@ -126,7 +126,7 @@ trinVUS.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
            the first column and marker measurements at the second and third column.")
     if (any(sapply(1 : (ncol(dat)-1), function(i) class(dat[, i+1])!="numeric")) ) {
       for (i in 1 : (ncol(dat)-1)) {
-        if (class(dat[, i+1])!="numeric") dat[,(i+1)] <- as.numeric(dat[,(i+1)]) }
+        if (!inherits(dat[, i+1],"numeric")) dat[,(i+1)] <- as.numeric(dat[,(i+1)]) }
       warning("Some measurements were not numeric. Forced to numeric.")
     }
 
@@ -373,7 +373,7 @@ trinVUS.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   # naming estimates:
   if (!is.null(dat)) {
     names(estimate)[1] <- paste("VUS of", names(dat)[2])
-    if (class(summary.dat)=="list") names(summary.dat)[1] <- names(dat)[2]
+    if (inherits(summary.dat,"list")) names(summary.dat)[1] <- names(dat)[2]
     if (ncol(dat) > 2) {
       names(estimate)[2] <- paste("VUS of", names(dat)[3])
       names(summary.dat)[2] <- names(dat)[3] }

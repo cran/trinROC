@@ -209,7 +209,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
     if (sep.dens == FALSE) {
       # common x-axe histograms & densities:
       histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
-        geom_histogram(aes_string(y ="..density.."), binwidth=(max(data$value)-min(data$value))/15,
+        geom_histogram(aes(y =after_stat(density)), binwidth=(max(data$value)-min(data$value))/15,
                        position = "dodge", alpha=0.7, show.legend = FALSE) +
         scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
         scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), name = "Class") +
@@ -220,7 +220,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
     # separate x-axe histograms & densities:
     } else {
       histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
-        geom_histogram(aes_string(y = "..density.."),binwidth=(max(data$value)-min(data$value))/30,
+        geom_histogram(aes(y =after_stat(density)),binwidth=(max(data$value)-min(data$value))/30,
                        show.legend = FALSE) +
         scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
         scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), name="Class") +

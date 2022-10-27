@@ -1,3 +1,16 @@
+# trinROC 0.6
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+* added axis labels to the 3d plots
+* updated CITATION file
+
+BUG FIXES 
+
+* adjusted functions `SD()` and `VAR()`
+* minor code cleaning
+
+
 # trinROC 0.5
 
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -34,7 +47,7 @@ INTERNAL CHANGES
 
 
 
-# trinROC 0.3-*
+# trinROC 0.3
 
 BUG FIXES
 

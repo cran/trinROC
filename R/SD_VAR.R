@@ -8,7 +8,7 @@
 SD <- function(x) {
   n <- length(x)
   if (getOption("trinROC.MLE")) {
-    sd(x)*(n)/(n-1)
+    sd(x)*sqrt((n-1)/n)
   } else {
     sd(x)
   }
@@ -24,7 +24,7 @@ SD <- function(x) {
 VAR <- function(x) {
   n <- length(x)
   if (getOption("trinROC.MLE")) {
-    var(x)*(n)/(n-1)
+    var(x)*(n-1)/n
   } else {
     var(x)
   }

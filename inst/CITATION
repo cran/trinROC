@@ -1,7 +1,7 @@
 citHeader("To cite `trinROC` in publications use:")
 
 citEntry(entry = "Article",
-  title        = "Inference in {ROC} surface analysis via a trinormal model-based testing approach",
+  title        = "Inference in receiver operating characteristic surface analysis via a trinormal model-based testing approach",
   author       = personList(as.person("Samuel Noll"),
                             as.person("Reinhard Furrer"),
                             as.person("Benjamin Reiser"),
@@ -17,4 +17,15 @@ citEntry(entry = "Article",
         "Stat, 8(1), e249."),
 )
 
+citEntry(entry = "Manual",
+    title = "trinROC: Statistical Tests for Assessing Trinormal ROC Data",
+    author = "Samuel Noll and Reinhard Furrer",
+    year = "2022",
+    note = "R package version 0.6",
+    url = "https://CRAN.R-project.org/package=trinROC",
+    textVersion  =
+  paste("Noll, S and Furrer, R. (2022). trinROC: Statistical Tests for
+  Assessing Trinormal ROC Data.  R package version 0.5.2.
+  https://CRAN.R-project.org/package=trinROC"),
+)
 

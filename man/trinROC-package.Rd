@@ -21,17 +21,18 @@ Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2019).
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://git.math.uzh.ch/reinhard.furrer/trinROC}
+  \item \url{https://math.uzh.ch/pages/trinROC/}
   \item Report bugs at \url{https://git.math.uzh.ch/reinhard.furrer/trinROC/-/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Reinhard Furrer \email{reinhard.furrer@math.uzh.ch}
+\strong{Maintainer}: Annina Cincera \email{annina.cincera@math.uzh.ch}
 
 Authors:
 \itemize{
   \item Samuel Noll \email{uncle.sam@gmx.net}
+  \item Reinhard Furrer \email{reinhard.furrer@math.uzh.ch}
 }
 
 Other contributors:

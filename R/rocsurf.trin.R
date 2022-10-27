@@ -103,6 +103,9 @@ rocsurf.trin <- function(x, y, z, p=300, plot = TRUE, saveVUS = FALSE) {
               shade = 0.75, smooth = FALSE, shininess = 100 )
     grid3d(c("x", "y", "z"), n =10)
     axes3d(c("x+", "y+", "z+"), labels = TRUE, color = "darkgray")
+    rgl::title3d(main=NULL,sub=NULL,zlab="TCF3",color="darkgray",level=2.5)
+    rgl::mtext3d("TCF1", "x+", color="darkgray", level=2.5, line=2.5)
+    rgl::mtext3d("TCF2", "y+", color="darkgray", line=2.5,level=2.5)
 
     if (saveVUS == TRUE) rgl.snapshot("trinVUS.png")
   }

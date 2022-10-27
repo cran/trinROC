@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2021-05-23 r80364) -- "Unsuffered Consequences"
-Copyright (C) 2021 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-09-29 r82963) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -45,7 +45,7 @@ Type 'q()' to quit R.
 	Bootstrap test for single classifier assessment
 
 data:  healthy intermediate diseased of Fac1
-Z-stat = 3.8227, p-value = 0.000132
+Z-stat = 3.8303, p-value = 0.000128
 alternative hypothesis: true Difference in VUS is not equal to 0
 sample estimates:
 VUS of Fac1 
@@ -177,7 +177,7 @@ VUS of Fac1
 --------------------------------------------------------------------- 
  data: healthy, intermediate and diseased
 
-Boot statistic: 1.5, Boot p.value: 0.13365
+Boot statistic: 1.501, Boot p.value: 0.13326
 
  empirical VUS:  0.283 
 --------------------------------------------------------------------- 
@@ -197,7 +197,7 @@ Boot statistic: 1.5, Boot p.value: 0.13365
 --------------------------------------------------------------------- 
  data: x, y and z
 
-Boot statistic: 1.5, Boot p.value: 0.13365
+Boot statistic: 1.501, Boot p.value: 0.13326
 
  empirical VUS:  0.283 
 --------------------------------------------------------------------- 
@@ -215,14 +215,14 @@ Boot statistic: 1.5, Boot p.value: 0.13365
 --------------------------------------------------------------------- 
  data: healthy, intermediate and diseased
 
-ROC test statistic: 37.764, ROC p.value: 0
- VUS test statistic:  4.159 ,  VUS p.value:  3e-05 
+ROC test statistic: 40.56, ROC p.value: 0
+ VUS test statistic:  4.373 ,  VUS p.value:  1e-05 
 
- trinormal VUS:  0.391 
+ trinormal VUS:  0.406 
 
 Parameters: 
  	a	b	c	d	
- 	1.3029	-0.4654	1.0088	0.9491	
+ 	1.2756	-0.4844	0.9887	0.9889	
 --------------------------------------------------------------------- 
 > # trinormal EDA with different plots:
 > roc.eda(dat = cancer[,c(1,5)], type = "t", sep.dens = TRUE, scatter = TRUE)
@@ -236,14 +236,14 @@ Parameters:
 --------------------------------------------------------------------- 
  data: healthy, intermediate and diseased
 
-ROC test statistic: 25.421, ROC p.value: 4e-05
- VUS test statistic:  3.418 ,  VUS p.value:  0.00063 
+ROC test statistic: 27.129, ROC p.value: 2e-05
+ VUS test statistic:  3.6 ,  VUS p.value:  0.00032 
 
- trinormal VUS:  0.344 
+ trinormal VUS:  0.356 
 
 Parameters: 
  	a	b	c	d	
- 	1.3766	-1.1808	1.101	0.1951	
+ 	1.3477	-1.229	1.0791	0.2033	
 --------------------------------------------------------------------- 
 > 
 > 
@@ -267,24 +267,24 @@ $Overview
                    Fac1   Fac3   Fac2   Fac4
 Charts           1.0000 2.0000 3.0000 4.0000
 Emp. VUS         0.5647 0.5451 0.3934 0.2830
-Trin. VUS        0.4742 0.5481 0.3733 0.3077
-p.value ROC test 0.0000 0.0000 0.0009 0.0047
-p.value VUS test 0.0006 0.0000 0.0079 0.0440
+Trin. VUS        0.4946 0.5828 0.4038 0.3275
+p.value ROC test 0.0000 0.0000 0.0004 0.0020
+p.value VUS test 0.0004 0.0000 0.0031 0.0256
 Nr. of NA's      0.0000 0.0000 0.0000 0.0000
 
 $P.values
 $P.values$trinROC
-     Fac1     Fac2        Fac3       Fac4
-Fac1   NA 0.327021 0.001143259 0.02361469
-Fac2   NA       NA 0.039195104 0.33410345
-Fac3   NA       NA          NA 0.03605134
-Fac4   NA       NA          NA         NA
+     Fac1      Fac2         Fac3       Fac4
+Fac1   NA 0.2123792 8.553118e-05 0.01161026
+Fac2   NA        NA 1.702445e-02 0.23905378
+Fac3   NA        NA           NA 0.02179596
+Fac4   NA        NA           NA         NA
 
 $P.values$trinVUS
      Fac1      Fac2      Fac3       Fac4
-Fac1   NA 0.2689015 0.5817586 0.15087236
-Fac2   NA        NA 0.1258723 0.49200409
-Fac3   NA        NA        NA 0.03544401
+Fac1   NA 0.2878528 0.5261863 0.16057154
+Fac2   NA        NA 0.1224995 0.42854226
+Fac3   NA        NA        NA 0.02756127
 Fac4   NA        NA        NA         NA
 
 
@@ -354,22 +354,22 @@ Fac4   NA        NA        NA         NA
 	Trinormal based ROC test for single classifier assessment
 
 data:  healthy  intermediate  diseased  of  Class2
-Chi-Squared test = 47.105, df = 4, p-value = 1.45e-09
+Chi-Squared test = 49.989, df = 4, p-value = 3.629e-10
 alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
 sample estimates:
-             VUS        a        b        c         d
-Class2 0.4158225 1.837083 -1.23332 0.843642 0.5600527
+             VUS        a         b         c         d
+Class2 0.4328247 1.798492 -1.283656 0.8268255 0.5835495
 
 > trinROC.test(dat = krebs[,c(1,5)])
 
 	Trinormal based ROC test for single classifier assessment
 
 data:  healthy  intermediate  diseased  of  Fac4
-Chi-Squared test = 15.006, df = 4, p-value = 0.004688
+Chi-Squared test = 16.926, df = 4, p-value = 0.001998
 alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
 sample estimates:
-           VUS       a         b         c         d
-Fac4 0.3076774 1.45496 -0.314366 0.8000247 0.5608057
+           VUS       a          b         c         d
+Fac4 0.3274583 1.39355 -0.3395081 0.7770584 0.6141944
 
 > 
 > # result is equal to:
@@ -381,11 +381,11 @@ Fac4 0.3076774 1.45496 -0.314366 0.8000247 0.5608057
 	Trinormal based ROC test for single classifier assessment
 
 data:  x1 y1 and z1
-Chi-Squared test = 47.105, df = 4, p-value = 1.45e-09
+Chi-Squared test = 49.989, df = 4, p-value = 3.629e-10
 alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
 sample estimates:
-                   VUS        a        b        c         d
-Classifier1: 0.4158225 1.837083 -1.23332 0.843642 0.5600527
+                   VUS        a         b         c         d
+Classifier1: 0.4328247 1.798492 -1.283656 0.8268255 0.5835495
 
 > 
 > # comparison of marker 2 and 6:
@@ -394,24 +394,24 @@ Classifier1: 0.4158225 1.837083 -1.23332 0.843642 0.5600527
 	Trinormal based ROC test for comparison of paired ROC surfaces
 
 data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
-Chi-Squared test = 10.381, df = 4, p-value = 0.03448
+Chi-Squared test = 11.451, df = 4, p-value = 0.02193
 alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
 sample estimates:
-             VUS        a         b        c         d
-Class2 0.4158225 1.837083 -1.233320 0.843642 0.5600527
-Class4 0.3436110 1.376642 -1.180839 1.100997 0.1951308
+             VUS        a         b         c         d
+Class2 0.4328247 1.798492 -1.283656 0.8268255 0.5835495
+Class4 0.3560958 1.347723 -1.229033 1.0790503 0.2033175
 
 > trinROC.test(dat = cancer[,c(1,3,5)], paired = FALSE)
 
 	Trinormal based ROC test for comparison of two independent classifiers
 
 data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
-Chi-Squared test = 6.9723, df = 4, p-value = 0.1374
+Chi-Squared test = 7.1352, df = 4, p-value = 0.1289
 alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
 sample estimates:
-             VUS        a         b        c         d
-Class2 0.4158225 1.837083 -1.233320 0.843642 0.5600527
-Class4 0.3436110 1.376642 -1.180839 1.100997 0.1951308
+             VUS        a         b         c         d
+Class2 0.4328247 1.798492 -1.283656 0.8268255 0.5835495
+Class4 0.3560958 1.347723 -1.229033 1.0790503 0.2033175
 
 > 
 > # result is equal to:
@@ -423,12 +423,12 @@ Class4 0.3436110 1.376642 -1.180839 1.100997 0.1951308
 	Trinormal based ROC test for comparison of paired ROC surfaces
 
 data:  x1 y1 z1 and x2 y2 z2
-Chi-Squared test = 10.381, df = 4, p-value = 0.03448
+Chi-Squared test = 11.451, df = 4, p-value = 0.02193
 alternative hypothesis: true a1-a2, b1-b1, c1-c2 and d1-d2 is not equal to 0
 sample estimates:
-                   VUS        a         b        c         d
-Classifier1: 0.4158225 1.837083 -1.233320 0.843642 0.5600527
-Classifier2: 0.3436110 1.376642 -1.180839 1.100997 0.1951308
+                   VUS        a         b         c         d
+Classifier1: 0.4328247 1.798492 -1.283656 0.8268255 0.5835495
+Classifier2: 0.3560958 1.347723 -1.229033 1.0790503 0.2033175
 
 > 
 > 
@@ -454,22 +454,22 @@ Classifier2: 0.3436110 1.376642 -1.180839 1.100997 0.1951308
 	Trinormal VUS test for single classifier assessment
 
 data:  healthy intermediate diseased of Class2
-Z-stat = 4.4732, p-value = 7.704e-06
+Z-stat = 4.7208, p-value = 2.349e-06
 alternative hypothesis: true Difference in VUS is not equal to 0
 sample estimates:
 VUS of Class2 
-    0.4158225 
+    0.4328247 
 
 > trinVUS.test(dat = krebs[,c(1,5)])
 
 	Trinormal VUS test for single classifier assessment
 
 data:  healthy intermediate diseased of Fac4
-Z-stat = 2.0139, p-value = 0.04402
+Z-stat = 2.2327, p-value = 0.02557
 alternative hypothesis: true Difference in VUS is not equal to 0
 sample estimates:
 VUS of Fac4 
-  0.3076774 
+  0.3274583 
 
 > 
 > # result is equal to:
@@ -481,11 +481,11 @@ VUS of Fac4
 	Trinormal VUS test for single classifier assessment
 
 data:  x1 y1 and z1
-Z-stat = 4.4732, p-value = 7.704e-06
+Z-stat = 4.7208, p-value = 2.349e-06
 alternative hypothesis: true Difference in VUS is not equal to 0
 sample estimates:
 VUS of Classifier 1 
-          0.4158225 
+          0.4328247 
 
 > 
 > # comparison of marker 2 and 6:
@@ -494,22 +494,22 @@ VUS of Classifier 1
 	Trinormal VUS test for comparison of paired ROC data
 
 data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
-Z-stat = 1.2496, p-value = 0.2114
+Z-stat = 1.3584, p-value = 0.1743
 alternative hypothesis: true Difference in VUS is not equal to 0
 sample estimates:
 VUS of Class2 VUS of Class4 
-    0.4158225     0.3436110 
+    0.4328247     0.3560958 
 
 > trinVUS.test(dat = cancer[,c(1,3,5)], paired = FALSE)
 
 	Trinormal VUS test for comparison of two independent classifiers
 
 data:  healthy intermediate diseased of Class2  and  healthy intermediate diseased of Class4
-Z-stat = 0.94961, p-value = 0.3423
+Z-stat = 0.99489, p-value = 0.3198
 alternative hypothesis: true Difference in VUS is not equal to 0
 sample estimates:
 VUS of Class2 VUS of Class4 
-    0.4158225     0.3436110 
+    0.4328247     0.3560958 
 
 > 
 > # result is equal to:
@@ -521,11 +521,11 @@ VUS of Class2 VUS of Class4
 	Trinormal VUS test for comparison of paired ROC data
 
 data:  x1 y1 z1 and x2 y2 z2
-Z-stat = 1.2496, p-value = 0.2114
+Z-stat = 1.3584, p-value = 0.1743
 alternative hypothesis: true Difference in VUS is not equal to 0
 sample estimates:
 VUS of Classifier 1 VUS of Classifier 2 
-          0.4158225           0.3436110 
+          0.4328247           0.3560958 
 
 > 
 > 
@@ -535,7 +535,7 @@ VUS of Classifier 1 VUS of Classifier 2
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  5.689 0.105 6.06 0.001 0.001 
+Time elapsed:  2.841 0.028 3.072 0.001 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -342,21 +342,31 @@ trinVUS.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
   x.test  <- (vus.1-vus.2) / (Var.vus1 + Var.vus2 - 2*cov.vus1vus2)^0.5
   names(x.test) <- "Z-stat"
 
+  cint <- NULL
   if (alternative == "two.sided") {
     p.value <- 2 * pnorm(-abs(x.test), lower.tail = TRUE)
     alpha <- 1 - conf.level
-    cint <- qnorm(1 - alpha/2) * (Var.vus1 + Var.vus2 - 2*cov.vus1vus2)^0.5
-    cint <- (vus.1-vus.2) + c(-cint, cint)
+    if(!twocurves) {
+      cint <- qnorm(1 - alpha/2) * (Var.vus1)^0.5
+      cint <- vus.1 + c(-cint, cint)
+      attr(cint, "conf.level") <- conf.level
+    }
   } else if (alternative == "less") {
     p.value <- pnorm(x.test, lower.tail = TRUE)
-    cint <- c(-Inf, (vus.1-vus.2) + qnorm(conf.level) *
-                (Var.vus1 + Var.vus2 - 2*cov.vus1vus2)^0.5)
+    if(!twocurves) {
+     cint <- c(-Inf, vus.1 + qnorm(conf.level) *
+                  (Var.vus1)^0.5)
+     attr(cint, "conf.level") <- conf.level
+    }
   } else if (alternative == "greater") {
     p.value <- pnorm(x.test, lower.tail = FALSE)
-    cint <- c((vus.1-vus.2) - qnorm(conf.level) *
-                (Var.vus1 + Var.vus2 - 2*cov.vus1vus2)^0.5, Inf)
+    if(!twocurves) {
+      cint <- c(vus.1 - qnorm(conf.level) *
+                 (Var.vus1)^0.5, Inf)
+      attr(cint, "conf.level") <- conf.level
+    }
   }
-  attr(cint, "conf.level") <- conf.level
+
 
   if (is.na(p.value))
     {p.value<-1; print("Denominator is zero. Conclude complete alikeness.")}
@@ -379,10 +389,15 @@ trinVUS.test <- function(x1, y1, z1, x2 = 0, y2 = 0, z2 = 0, dat = NULL,
       names(summary.dat)[2] <- names(dat)[3] }
   }
 
-  null.value <- 0
-  names(null.value) <- "Difference in VUS"
+  if (twocurves) {
+    null.value <- 0
+    names(null.value) <- "difference in VUS"
+  } else {
+    null.value <- "1/6"
+    names(null.value) <- "VUS"
+  }
   rval <- list(statistic = x.test, p.value = unname(p.value),
-               conf.int = NULL, estimate = estimate,
+               estimate = estimate, conf.int.estimate = cint,
                null.value=null.value, alternative = alternative,
                method = method, data.name = dname,
                Summary = summary.dat, Sigma = sigma)

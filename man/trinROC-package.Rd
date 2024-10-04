@@ -6,7 +6,7 @@
 \alias{trinROC-package}
 \title{trinROC: Statistical Tests for Assessing Trinormal ROC Data}
 \description{
-Several statistical test functions as well as a function for exploratory data analysis to investigate classifiers allocating individuals to one of three disjoint and ordered classes. In a single classifier assessment the discriminatory power is compared to classification by chance. In a comparison of two classifiers the null hypothesis corresponds to equal discriminatory power of the two classifiers.
+Several statistical test functions as well as a function for exploratory data analysis to investigate classifiers allocating individuals to one of three disjoint and ordered classes. In a single classifier assessment the discriminatory power is compared to classification by chance. In a comparison of two classifiers the null hypothesis corresponds to equal discriminatory power of the two classifiers. See also "ROC Analysis for Classification and Prediction in Practice" by Nakas, Bantis and Gatsonis (2023), ISBN 9781482233704.
 }
 \details{
 See \code{vignette("Overview", package = "trinROC")} for an overview of the package.
@@ -21,18 +21,18 @@ Noll, S., Furrer, R., Reiser, B. and Nakas, C. T. (2019).
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://math.uzh.ch/pages/trinROC/}
+  \item \url{https://www.math.uzh.ch/pages/trinROC/}
   \item Report bugs at \url{https://git.math.uzh.ch/reinhard.furrer/trinROC/-/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Annina Cincera \email{annina.cincera@math.uzh.ch}
+\strong{Maintainer}: Reinhard Furrer \email{reinhard.furrer@uzh.ch} (\href{https://orcid.org/0000-0002-6319-2332}{ORCID})
 
 Authors:
 \itemize{
   \item Samuel Noll \email{uncle.sam@gmx.net}
-  \item Reinhard Furrer \email{reinhard.furrer@math.uzh.ch}
+  \item Annina Cincera \email{annina.cincera@sunrise.ch}
 }
 
 Other contributors:

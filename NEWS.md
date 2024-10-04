@@ -1,3 +1,15 @@
+# trinROC 0.7
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+* improved verbose output of `roc.eda()`
+* improved referencing 
+* change of maintainer (Thank you AC, for the work to this point)
+
+INTERNAL CHANGES
+
+* eliminated depreciated functions of `ggplot2`
+
 # trinROC 0.6
 
 SIGNIFICANT USER-VISIBLE CHANGES

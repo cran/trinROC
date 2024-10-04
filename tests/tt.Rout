@@ -1,0 +1,36 @@
+
+ Data overview of empirical ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied test: Bootstrap test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: D-, D0 and D+
+
+Boot statistic: 1.145, Boot p.value: 0.25208
+
+ empirical VUS:  0.368 
+--------------------------------------------------------------------- 
+
+ Data overview of trinormal ROC Classifier 
+--------------------------------------------------------------------- 
+
+ Applied tests: Trinormal based ROC and VUS test 
+ Significance level: 0.05
+ Alternative hypothesis: two.sided
+--------------------------------------------------------------------- 
+ data: D-, D0 and D+
+
+ROC test statistic: 8.69, ROC p.value: 0.06934
+ VUS test statistic:  1.041 ,  VUS p.value:  0.29777 
+
+ trinormal VUS:  0.306 
+
+Parameters: 
+ 	a	b	c	d	
+ 	0.6959	-0.3558	0.4462	0.1514	
+--------------------------------------------------------------------- 
+[ FAIL 0 | [35mWARN[39m 1 | SKIP 0 | [32mPASS[39m 43 ]
+
+[ FAIL 0 | [35mWARN[39m 1 | SKIP 0 | [32mPASS[39m 43 ]

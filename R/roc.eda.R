@@ -1,7 +1,7 @@
 #' Exploratory data analysis for a three-class ROC marker
 #'
 #' A function that investigates data that arose from a single marker and
-#' containes the reference standard of the three classes "healthy",
+#' contains the reference standard of the three classes "healthy",
 #' "intermediate" and "diseased".
 #'
 #'@details For the preliminary assessment of a classifier, exporatory
@@ -20,8 +20,8 @@
 #'  \code{FALSE}). Note: To save a png \code{plotVUS} needs to be \code{TRUE} too.
 #'@param saveVUS a logical whether to save a PNG of the VUS in your current
 #'  working directory (default is \code{FALSE}).
-#'@param sep.dens a logical indicating if the densitie plots should be plotted
-#'  on separate x-axes (\code{TRUE}) or on a common axe (\code{FALSE}, is
+#'@param sep.dens a logical indicating if the density plots should be plotted
+#'  on separate x-axes (\code{TRUE}) or on a common axis (\code{FALSE}, is
 #'  default).
 #'@param scatter a logical indicating if the measurements per class plot should
 #'  be plotted as a boxplot (default) or as a scatterplot (\code{scatter =
@@ -34,6 +34,8 @@
 #'  not. Default is \code{TRUE}.
 #'@param alternative a character string specifying the alternative hypothesis,
 #'  must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}.
+#'@param class.labels a vector of character strings of length 3 specifying the labels
+#'  of the three classes used for the axis labeling in the boxplot.
 #'@return A list with class "htest" containing the following components:
 #'  \item{statistic}{The value of the test(s).}
 #'  \item{p.value}{The p-value for the test(s).}
@@ -65,13 +67,13 @@
 #' data(krebs)
 #'
 #' # empirical EDA:
-#' roc.eda(dat = krebs[,c(1,5)], type = "e", plotVUS = FALSE)
-#'
-#' # equal data input via:
 #' x <- with(krebs, krebs[trueClass=="healthy", 5])
 #' y <- with(krebs, krebs[trueClass=="intermediate", 5])
 #' z <- with(krebs, krebs[trueClass=="diseased", 5])
-#' roc.eda(x, y, z, type = "e", sep.dens = TRUE)
+#' roc.eda(x, y, z, type = "e", plotVUS = FALSE)
+#'
+#' # equal data input via:
+#' # roc.eda(dat = krebs[,c(1,5)], type = "e", plotVUS = FALSE)
 #'
 #' data(cancer)
 #' # trinormal EDA:
@@ -91,7 +93,8 @@
 roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
                       plotVUS = FALSE, saveVUS = FALSE, sep.dens = FALSE,
                       scatter = FALSE, conf.level = 0.95, n.boot = 1000,
-                      verbose = TRUE, alternative = c("two.sided", "less", "greater")) {
+                      verbose = TRUE, alternative = c("two.sided", "less", "greater"),
+                      class.labels = c("healthy", "intermediate", "diseased")) {
 
   # checking arguments:
   type <- match.arg(type)
@@ -99,7 +102,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
 
   if (!missing(conf.level) & (length(conf.level) != 1 | !is.finite(conf.level) |
                                conf.level <= 0 | conf.level >= 1))
-    stop("'conf.level' must be a single number between 0 and 1")
+    stop("'conf.level' must be a single number between 0 and 1.")
 
   alternative <- match.arg(alternative)
 
@@ -112,6 +115,17 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
       not.num <- sapply(1 : (ncol(dat)-1), function(i) inherits(dat[, i+1],"numeric"))
       dat[, not.num==FALSE] <- as.numeric(dat[, not.num==FALSE])
       warning("Some measurements were not numeric. Forced to numeric.")
+    }
+
+  if (!length(class.labels)==3 | !inherits(class.labels,"character")){
+    class.labels <- c("healthy", "intermediate", "diseased")
+    warning("'class.labels' was not a vector of character strings of length 3.
+            Forced to default.")
+  }
+    if (length(class.labels)!= length(unique(class.labels))){
+      class.labels <- c("healthy", "intermediate", "diseased")
+      warning("'class.labels' was not a vector of 3 different character strings.
+              Forced to default.")
     }
 
     data.temp <- split(dat[,2], dat[,1], drop=FALSE)
@@ -154,10 +168,10 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
                     trinVUS.test(x, y, z, conf.level = conf.level,
                                  alternative = alternative))
 
-      VUS       <- temptrinROC$estimate[1,1]
+      VUS       <- temptrinVUS$estimate[[1]]
       statistic <- c(temptrinROC$statistic, temptrinVUS$statistic)
       p.value   <- c(temptrinROC$p.value, temptrinVUS$p.value)
-      conf.int  <- c(temptrinROC$conf.int, temptrinVUS$conf.int)
+      conf.int  <- c(temptrinVUS$conf.int.estimate)
       names(VUS)      <- "trinormal VUS: "
       names(statistic)<- c("ROC test statistic: ", "VUS test statistic: ")
       names(p.value)  <- c("ROC p.value: ", "VUS p.value: ")
@@ -184,7 +198,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
     VUS      <- tempBoot$estimate[1]
     statistic<- tempBoot$statistic
     p.value  <- tempBoot$p.value
-    conf.int <- tempBoot$conf.int
+    conf.int <- tempBoot$conf.int.estimate
     names(VUS)      <- "empirical VUS: "
     names(statistic)<- "Boot statistic: "
     names(p.value)  <- "Boot p.value: "
@@ -200,15 +214,16 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
 
     ## compute 2dim plots:
     # construct data frame for plotting:
-    trueClass <- factor(c(rep("healthy", length(x)),
-                        rep("intermediate", length(y)),
-                        rep("diseased", length(z))),
-                        levels = c("healthy", "intermediate", "diseased") )
-    data <- data.frame(trueClass = trueClass, value = c(x,y,z))
+    trueClass <- factor(c(rep(class.labels[1], length(x)),
+                        rep(class.labels[2], length(y)),
+                        rep(class.labels[3], length(z))),
+                        levels = class.labels )
+    value <- c(x,y,z)
+    data <- data.frame(trueClass = trueClass, value = value)
 
     if (sep.dens == FALSE) {
       # common x-axe histograms & densities:
-      histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
+      histROC <- ggplot(data, aes(x = value, colour=trueClass, fill=trueClass)) +
         geom_histogram(aes(y =after_stat(density)), binwidth=(max(data$value)-min(data$value))/15,
                        position = "dodge", alpha=0.7, show.legend = FALSE) +
         scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
@@ -219,7 +234,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
 
     # separate x-axe histograms & densities:
     } else {
-      histROC <- ggplot(data, aes_string(x = "value", colour="trueClass", fill="trueClass")) +
+      histROC <- ggplot(data, aes(x = value, colour=trueClass, fill=trueClass)) +
         geom_histogram(aes(y =after_stat(density)),binwidth=(max(data$value)-min(data$value))/30,
                        show.legend = FALSE) +
         scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
@@ -231,14 +246,14 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
 
     if (scatter == FALSE) {
     # boxplots:
-    meas.overview <- ggplot(data, aes_string(y="value", x="trueClass", fill = "trueClass")) +
+    meas.overview <- ggplot(data, aes(y=value, x=trueClass, fill = trueClass)) +
       stat_boxplot(geom ='errorbar') + geom_boxplot() +
       scale_fill_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
       coord_flip() + labs(x="", y=paste(Marker, "measurements"))
 
     } else {
     # scattter plot of data:
-    meas.overview <- ggplot(data, aes_string(y="value", x="trueClass", color = "trueClass")) +
+    meas.overview <- ggplot(data, aes(y=value, x=trueClass, color = trueClass)) +
       geom_jitter(width = 0.25) +
       scale_colour_manual(values=c("#79AB67", "#6EA3D0", "#D68898"), guide = "none") +
         coord_flip() + labs(x="", y=paste(Marker, "measurements"))
@@ -265,15 +280,16 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
     cat("---------------------------------------------------------------------",
         "\n", sep = " ")
     cat(" data: ", dname[1], ", ", dname[2], " and ", dname[3], "\n\n", sep = "")
-    cat("", rbind(names(statistic), round(statistic,3), c(", ",", ") ,
-                   names(p.value), round(p.value,5))[,1], "\n", sep = "")
+    cat(" ", rbind(names(statistic), round(statistic,3), c(", ",", ") ,
+                   names(p.value), round(p.value,5))[,1], "\n ", sep = "")
     if (type == "trinormal") {
       cat("", rbind(names(statistic), round(statistic,3), c(", ",", ") ,
-                   names(p.value), round(p.value,5))[,2], "\n", sep = " ") }
+                   names(p.value), round(p.value,5))[,2], "\n", sep = "") }
 
-    cat("\n", names(VUS), round(VUS,3), "\n", sep = " ")
+    cat("\n", " ", names(VUS), round(VUS,3), ", 95% CI: ",sep="")
+    cat(round(conf.int,3), "\n", sep = " ")
     if (type == "trinormal") {
-      cat("\n", "Parameters: ", "\n", sep = "")
+      cat("\n", " Parameters: ", "\n", sep = "")
       cat(" ", names(temptrinROC$estimate[-1]),"\n",sep="\t")
       cat(" ", as.numeric(round(temptrinROC$estimate[-1],4)),"\n",sep="\t") }
     cat("---------------------------------------------------------------------",
@@ -281,7 +297,7 @@ roc.eda <- function(x, y, z, dat = NULL, type = c("empirical", "trinormal"),
   }
 
   rval <- list(statistic = statistic, p.value = p.value,
-               VUS=VUS, dat.summary=summary, alternative = alternative,
+               VUS=VUS, conf.int=conf.int, dat.summary=summary, alternative = alternative,
                type = type, data.name = dname, method = method,
                xVUS = surf$t1, yVUS = surf$t2, zVUS = surf$zVUS,
                histROC = histROC, meas.overview = meas.overview,

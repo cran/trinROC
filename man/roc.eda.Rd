@@ -17,7 +17,8 @@ roc.eda(
   conf.level = 0.95,
   n.boot = 1000,
   verbose = TRUE,
-  alternative = c("two.sided", "less", "greater")
+  alternative = c("two.sided", "less", "greater"),
+  class.labels = c("healthy", "intermediate", "diseased")
 )
 }
 \arguments{
@@ -38,8 +39,8 @@ the \code{trinormal} VUS and tests are computed.}
 \item{saveVUS}{a logical whether to save a PNG of the VUS in your current
 working directory (default is \code{FALSE}).}
 
-\item{sep.dens}{a logical indicating if the densitie plots should be plotted
-on separate x-axes (\code{TRUE}) or on a common axe (\code{FALSE}, is
+\item{sep.dens}{a logical indicating if the density plots should be plotted
+on separate x-axes (\code{TRUE}) or on a common axis (\code{FALSE}, is
 default).}
 
 \item{scatter}{a logical indicating if the measurements per class plot should
@@ -57,6 +58,9 @@ not. Default is \code{TRUE}.}
 
 \item{alternative}{a character string specifying the alternative hypothesis,
 must be one of \code{"two.sided"} (default), \code{"greater"} or \code{"less"}.}
+
+\item{class.labels}{a vector of character strings of length 3 specifying the labels
+of the three classes used for the axis labeling in the boxplot.}
 }
 \value{
 A list with class "htest" containing the following components:
@@ -81,7 +85,7 @@ A list with class "htest" containing the following components:
 }
 \description{
 A function that investigates data that arose from a single marker and
-containes the reference standard of the three classes "healthy",
+contains the reference standard of the three classes "healthy",
 "intermediate" and "diseased".
 }
 \details{
@@ -100,13 +104,13 @@ the function \code{boot.test()}.
 data(krebs)
 
 # empirical EDA:
-roc.eda(dat = krebs[,c(1,5)], type = "e", plotVUS = FALSE)
-
-# equal data input via:
 x <- with(krebs, krebs[trueClass=="healthy", 5])
 y <- with(krebs, krebs[trueClass=="intermediate", 5])
 z <- with(krebs, krebs[trueClass=="diseased", 5])
-roc.eda(x, y, z, type = "e", sep.dens = TRUE)
+roc.eda(x, y, z, type = "e", plotVUS = FALSE)
+
+# equal data input via:
+# roc.eda(dat = krebs[,c(1,5)], type = "e", plotVUS = FALSE)
 
 data(cancer)
 # trinormal EDA:

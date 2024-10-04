@@ -69,7 +69,7 @@
 #' @importFrom gridExtra grid.arrange
 #' @importFrom ggplot2 ggplot  aes coord_flip facet_grid geom_boxplot after_stat
 #'   geom_density geom_histogram geom_jitter labs scale_colour_manual
-#'   scale_fill_manual stat_boxplot aes_string
+#'   scale_fill_manual stat_boxplot aes
 #' @param conf.level confidence level of the interval. A numeric value between (0,1)
 #'   yielding the significance level \eqn{\alpha=1-}\code{conf.level}.
 #'
